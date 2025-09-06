@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>divisasCU — Web</title>
+<title>divisasCU — Mercado Informal de Divisas</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --brand:#0a2a6a;
@@ -21,52 +22,154 @@
   --tab-inactive-bg:#e2e8f0;
   --tab-active-color:#fff;
   --tab-inactive-color:#111;
+  --text-primary:#111;
+  --text-secondary:#334155;
 }
+
+[data-theme="dark"] {
+  --bg:#0f172a;
+  --card:#1e293b;
+  --muted:#94a3b8;
+  --text-primary:#f1f5f9;
+  --text-secondary:#cbd5e1;
+  --tab-inactive-bg:#334155;
+  --tab-inactive-color:#f1f5f9;
+  --rate-color:#60a5fa; /* Color más visible para precios en modo oscuro */
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,system-ui,Arial;background:var(--bg);color:#111}
+body{font-family:'Inter',system-ui,Arial;background:var(--bg);color:var(--text-primary);transition:background 0.3s, color 0.3s;}
 header{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:14px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border-bottom:2px solid rgba(255,255,255,0.2)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800}
-.logo svg{width:44px;height:44px}
+.logo-img {width:44px;height:44px;background: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-weight: bold;font-size: 20px;color: var(--brand);}
 .logo .name{font-size:1.4rem}
-.logo .small{font-size:0.75rem;color:#fff}
+.logo .small{font-size:0.75rem;color:#fff;opacity:0.9;}
 .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .clock-box{text-align:center;margin-right:10px}
 .clock-box .title{font-size:0.7rem;color:#fff;text-transform:uppercase;letter-spacing:0.5px}
 .clock-box .clock{background:rgba(255,255,255,0.2);padding:6px 12px;border-radius:8px;font-family:'Digital-7 Mono', monospace;font-weight:700;font-size:1rem;color:#fff}
+.clock-box .clock .blink{animation: blink 1s infinite;}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
 .wrap{max-width:480px;margin:16px auto;padding:0 12px}
 .accent-line{height:6px;background:linear-gradient(90deg,var(--gradient-start),var(--accent),var(--gradient-end));border-radius:6px;margin-bottom:14px}
 
-.tabs{display:flex;justify-content:center;gap:12px;padding:12px 0;overflow-x:auto}
-.tab{padding:10px 16px;border-radius:12px;font-weight:700;cursor:pointer;flex-shrink:0;font-size:0.9rem;text-align:center;transition:all 0.2s}
+.tabs{display:flex;justify-content:center;gap:8px;padding:12px 0;overflow-x:auto;flex-wrap: nowrap;}
+.tab{padding:10px 16px;border-radius:12px;font-weight:700;cursor:pointer;flex-shrink:0;font-size:0.9rem;text-align:center;transition:all 0.2s;min-width: 80px;}
 .tab.active{background:var(--tab-active-bg);color:var(--tab-active-color);box-shadow:0 4px 10px rgba(0,0,0,0.2)}
 .tab.inactive{background:var(--tab-inactive-bg);color:var(--tab-inactive-color)}
 
 .card{background:var(--card);border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.12);overflow:hidden;margin-bottom:18px;transition:all 0.3s}
 .card:hover{transform:translateY(-2px)}
-.card-head{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.2)}
+.card-head{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:12px 16px;font-weight:700;display:flex;align-items:center;font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.2)}
+.card-head div:first-child{display:flex;align-items:center;gap:8px;}
 .table-wrap{overflow-x:auto;padding:12px}
 table{width:100%;border-collapse:collapse;font-size:0.85rem}
-thead th{background:#f8fafc;padding:10px;text-align:left;color:var(--muted);font-weight:700;border-bottom:2px solid #eef2f7}
-tbody td{padding:10px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+thead th{background:var(--bg);padding:10px;text-align:left;color:var(--muted);font-weight:700;border-bottom:2px solid var(--bg)}
+tbody td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:middle}
 .currency{display:flex;align-items:center;gap:8px;font-weight:700}
 .flag{width:28px;height:18px;object-fit:cover;border-radius:3px}
-.rate{font-weight:700;color:var(--brand)}
+.rate{font-weight:700;color:var(--brand);}
+[data-theme="dark"] .rate{color:var(--rate-color);} /* Color especial para modo oscuro */
 .trend{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;font-weight:700;font-size:0.75rem}
 .trend.up{color:#fff;background:var(--up)}
 .trend.down{color:#fff;background:var(--down)}
 .trend.neutral{color:#fff;background:var(--neutral)}
 
-#calcAmount{padding:8px;border-radius:8px;border:1px solid #cbd5e1;width:100%;font-weight:700}
-#calcCurrency{padding:8px;border-radius:8px;border:1px solid #cbd5e1;width:100%;font-weight:700}
-#calcBtn{background:var(--accent);color:#fff;border:none;padding:8px;border-radius:10px;font-weight:700;cursor:pointer;transition:all 0.2s}
-#calcBtn:hover{background:#ff914d}
-#calcResult{font-weight:700;margin-top:6px;font-size:0.9rem;text-align:center}
-footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;padding:8px}
+/* Estilos mejorados para la calculadora */
+.calc-container{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.calc-input-group{grid-column:span 2}
+.calc-input-group label{display:block;margin-bottom:6px;font-weight:600;color:var(--muted);font-size:0.9rem}
+.calc-input, .calc-select{padding:12px;border-radius:12px;border:2px solid var(--tab-inactive-bg);width:100%;font-weight:600;transition:all 0.2s;background:var(--card);color:var(--text-primary)}
+.calc-input:focus, .calc-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,53,0.2)}
+.calc-btn{grid-column:span 2;background:var(--accent);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;justify-content:center;align-items:center;gap:8px}
+.calc-btn:hover{background:#ff914d;transform:translateY(-2px);box-shadow:0 4px 12px rgba(255,107,53,0.3)}
+.calc-result{grid-column:span 2;margin-top:12px;padding:16px;background:var(--bg);border-radius:12px;text-align:center;font-weight:700;font-size:1.1rem;color:var(--brand);display:flex;flex-direction:column;gap:4px}
+.calc-result small{font-size:0.8rem;color:var(--muted);font-weight:500}
+.conversion-type {display: flex;gap: 10px;margin-bottom: 12px;}
+.conversion-btn {flex: 1;padding: 10px;border-radius: 10px;border: 2px solid var(--tab-inactive-bg);background: var(--card);color: var(--text-primary);font-weight: 600;cursor: pointer;text-align: center;transition: all 0.2s;}
+.conversion-btn.active {background: var(--accent);color: white;border-color: var(--accent);}
+
+/* Estilos mejorados para el texto informativo */
+.info-text{font-family:'Roboto Flex', sans-serif;padding:1.5rem;line-height:1.6}
+.info-text p{margin-bottom:1rem;font-size:0.95rem;color:var(--text-secondary);font-weight:400}
+.info-text strong{font-weight:600;color:var(--brand)}
+.info-text p:last-child{margin-bottom:0}
+
+/* Footer mejorado */
+footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;padding:8px;display:flex;justify-content:center;align-items:center;gap:6px}
+footer .update-info{display:flex;align-items:center;gap:4px}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--tab-inactive-bg);
+}
+
+.setting-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
 @media(max-width:480px){
   .rate{font-size:0.8rem}
   .flag{width:24px;height:16px}
-  .tab{padding:8px 12px;font-size:0.8rem}
+  .tab{padding:8px 12px;font-size:0.8rem;min-width: 70px;}
+  .calc-container{grid-template-columns:1fr}
+  .calc-input-group, .calc-btn, .calc-result{grid-column:span 1}
+  .conversion-type {flex-direction: column;}
+  .logo .name{font-size:1.2rem;}
 }
 </style>
 </head>
@@ -74,16 +177,16 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;pad
 
 <header>
   <div class="logo">
-    <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32 14a1.5 1.5 0 0 1 1.5 1.5v3.2c4.9.5 8.3 3.2 8.3 7 0 3.8-3 5.8-8.3 7v6c2.7-.3 4.7-1.3 6.4-2.7a1.5 1.5 0 1 1 2 2.2c-2.4 2-5.3 3.2-8.4 3.6v3.2a1.5 1.5 0 1 1-3 0v-3.2c-5-.5-8.6-3.1-8.6-7.1 0-4.2 3.4-6.1 8.6-7.3v-5.8c-2.3.2-4 .9-5.7 2.1a1.5 1.5 0 0 1-2-2.2c2.4-1.8 5.2-2.8 7.7-3v-3.2A1.5 1.5 0 0 1 32 14Z" fill="#0a2a6a"/></svg>
+    <div class="logo-img"><i class="fas fa-coins"></i></div>
     <div>
-      <div class="name">divisasCU</div>
+      <div class="name">DivisasCU</div>
       <div class="small">MercadoInformal</div>
     </div>
   </div>
   <div class="controls">
     <div class="clock-box">
       <div class="title">Hora</div>
-      <div id="clock" class="clock">00:00</div>
+      <div id="clock" class="clock">00<span class="blink">:</span>00</div>
     </div>
   </div>
 </header>
@@ -95,11 +198,14 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;pad
     <div id="tabTableBtn" class="tab active">TABLA</div>
     <div id="tabChartBtn" class="tab inactive">GRAFICOS</div>
     <div id="tabCalcBtn" class="tab inactive">CALCULADORA</div>
+    <div id="tabSettingsBtn" class="tab inactive"><i class="fas fa-cog"></i></div>
   </div>
 
   <!-- Tabla -->
   <div id="tabTable" class="card">
-    <div class="card-head"><i class="fa-solid fa-exchange-alt"></i> CAMBIO DE MONEDAS | TIEMPO REAL</div>
+    <div class="card-head">
+      <div><i class="fa-solid fa-exchange-alt"></i> CAMBIO DE MONEDAS | TIEMPO REAL</div>
+    </div>
     <div class="table-wrap">
       <table id="ratesTable">
         <thead>
@@ -112,33 +218,85 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;pad
 
   <!-- Charts -->
   <div id="tabChart" class="card" style="display:none">
-    <div class="card-head"><i class="fa-solid fa-chart-line"></i> Gráficos</div>
+    <div class="card-head"><i class="fa-solid fa-chart-line"></i> GRAFICOS</div>
     <canvas id="lineChart" height="220" style="padding:12px"></canvas>
   </div>
 
-  <!-- Calculadora -->
+  <!-- Calculadora mejorada -->
   <div id="tabCalc" class="card" style="display:none">
-    <div class="card-head"><i class="fa-solid fa-calculator"></i> Calculadora</div>
-    <div style="padding:12px;display:grid;grid-template-columns:1fr 120px 120px;gap:8px;align-items:center">
-      <input id="calcAmount" type="number" placeholder="Cantidad" />
-      <select id="calcCurrency"></select>
-      <button id="calcBtn">Convertir</button>
-      <div id="calcResult" style="grid-column:1/4"></div>
+    <div class="card-head"><i class="fa-solid fa-calculator"></i> CALCULADORA</div>
+    <div class="calc-container">
+      <div class="conversion-type">
+        <div class="conversion-btn active" data-type="toCurrency">CUP → Divisa</div>
+        <div class="conversion-btn" data-type="toCUP">Divisa → CUP</div>
+      </div>
+      
+      <div class="calc-input-group">
+        <label for="calcAmount" id="calcAmountLabel">Cantidad en CUP</label>
+        <input id="calcAmount" type="number" placeholder="Ej: 1000" class="calc-input" />
+      </div>
+      
+      <div class="calc-input-group">
+        <label for="calcCurrency">Selecciona moneda</label>
+        <select id="calcCurrency" class="calc-select"></select>
+      </div>
+      
+      <button id="calcBtn" class="calc-btn">
+        <i class="fas fa-sync-alt"></i> Convertir
+      </button>
+      
+      <div id="calcResult" class="calc-result">
+        <span>Resultado de la conversión</span>
+        <small>Selecciona una cantidad y moneda</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Configuración -->
+  <div id="tabSettings" class="card" style="display:none">
+    <div class="card-head"><i class="fa-solid fa-cog"></i> CONFIGURACION</div>
+    <div>
+      <div class="setting-item">
+        <div class="setting-label">Modo oscuro</div>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">Notificaciones de cambios</div>
+        <label class="switch">
+          <input type="checkbox" id="notificationsToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-item">
+        <div class="setting-label">Actualización automática</div>
+        <label class="switch">
+          <input type="checkbox" id="autoUpdateToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
     </div>
   </div>
 
   <!-- Information card -->
   <div class="card">
     <div class="card-head">
-      <div><i class="fas fa-info-circle"></i> Información importante</div>
-    </div>
-    <div style="padding: 1.5rem;">
-      <p>Los precios mostrados son obtenidos del mercado informal y se actualizan en tiempo real según reportes de usuarios verificados.</p>
-      <p><strong>Nota:</strong> Las tasas de cambio pueden variar según la región y las condiciones del mercado.</p>
+      <i class="fas fa-info-circle"></i> INFORMACION IMPORTANTE</div>
+    
+    <div class="info-text">
+      <p>En este sitio encontrarás información sobre las tasas de cambio de divisas en Cuba, basada específicamente en el mercado informal y en los grupos de compra y venta que operan en todo el país. Te ofrecemos datos actualizados y confiables. Además, puedes usar nuestra herramienta para calcular de forma fácil y segura el valor de tu dinero en diferentes monedas.</p>
+      <p><strong>NOTA:</strong> Las tasas de cambio pueden variar según la región y las condiciones del mercado.</p>
     </div>
   </div>
 
-  <footer>© <strong>divisaCU</strong> — Última actualización: <span id="lastDate">--/--/----</span></footer>
+  <footer>
+    © <strong>divisasCU</strong> — 
+    <span class="update-info">
+      <i class="far fa-calendar-alt"></i> Última actualización: <span id="lastDate">--/--/----</span>
+    </span>
+  </footer>
 </div>
 
 <!-- Chart.js -->
@@ -146,39 +304,57 @@ footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;pad
 
 <script>
 const defaultRows = [
-  { code:"EUR", label:"EUR", flag:"https://flagcdn.com/eu.svg", rate:460.00, delta:+0, trend:"neutral" },
-  { code:"USD", label:"USD", flag:"https://flagcdn.com/us.svg", rate:410.00, delta:+0, trend:"neutral" },
-  { code:"MLC", label:"MLC", flag:"https://eltoque.com/images/mlc.png", rate:195.00, delta:-1, trend:"down" },
-  { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:280.00, delta:+0.00, trend:"neutral" },
-  { code:"CHF", label:"CHF", flag:"https://flagcdn.com/ch.svg", rate:408.13, delta:+1.51, trend:"up" },
-  { code:"MXN", label:"MXN", flag:"https://flagcdn.com/mx.svg", rate:21.22, delta:+0.19, trend:"up" },
-  { code:"BRL", label:"BRL", flag:"https://flagcdn.com/br.svg", rate:69.57, delta:+0.77, trend:"up" },
-  { code:"CLA", label:"CLA", flag:"https://darekho.github.io/divisascu/IMG_2902.png", rate:402.69, delta:+0.33, trend:"up" },
-  { code:"ZELLE", label:"ZELLE", flag:"https://darekho.github.io/divisascu/IMG_2901.png", rate:411.44, delta:+0.19, trend:"up" }
+  { code:"EUR", label:"EUR", flag:"https://flagcdn.com/eu.svg", rate:460.00, delta:0, trend:"neutral" },
+  { code:"USD", label:"USD", flag:"https://flagcdn.com/us.svg", rate:410.00, delta:0, trend:"neutral" },
+  { code:"MLC", label:"MLC", flag:"https://eltoque.com/images/mlc.png", rate:190.00, delta:-5, trend:"down" },
+  { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:278.00, delta:-2, trend:"down" },
+  { code:"CHF", label:"CHF", flag:"https://flagcdn.com/ch.svg", rate:409.19, delta:+1.06, trend:"up" },
+  { code:"MXN", label:"MXN", flag:"https://flagcdn.com/mx.svg", rate:21.44, delta:+0.16, trend:"up" },
+  { code:"BRL", label:"BRL", flag:"https://flagcdn.com/br.svg", rate:73.68, delta:+4.11, trend:"up" },
+  { code:"ZELLE", label:"ZELLE", flag:"https://darekho.github.io/divisascu/IMG_2901.png", rate:411.88, delta:+0.44, trend:"up" },
+  { code:"CLA", label:"CLA", flag:"https://darekho.github.io/divisascu/IMG_2902.png", rate:401.26, delta:-1.43, trend:"down" }
 ];
 
-let rows = defaultRows;
+let rows = JSON.parse(JSON.stringify(defaultRows));
+let filteredRows = [...rows];
+let conversionType = "toCurrency"; // "toCurrency" or "toCUP"
 
 /* Utils */
-const $ = s=>document.querySelector(s);
-const fmt = n=>Number(n).toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const fmt = n => {
+  const num = Number(n);
+  // Mostrar decimales solo cuando son necesarios
+  return num % 1 === 0 ? num.toString() : num.toLocaleString("es-ES", {minimumFractionDigits:2,maximumFractionDigits:2});
+};
 
 function tickClock(){
   const now = new Date();
-  $("#clock").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
-  $("#lastDate").textContent = now.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'}) + " • " + now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  const timeStr = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  $("#clock").innerHTML = timeStr.replace(':', '<span class="blink">:</span>');
+  $("#lastDate").textContent = now.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
 }
 setInterval(tickClock,1000); tickClock();
 
 function renderTable(){
   const tbody = $("#ratesTable tbody");
   tbody.innerHTML = "";
-  rows.forEach(r=>{
+  filteredRows.forEach(r => {
+    // Asegurar que los signos + y - se muestren correctamente
+    let cambioTexto = "";
+    if (r.delta > 0) {
+      cambioTexto = `+${fmt(r.delta)}`;
+    } else if (r.delta < 0) {
+      cambioTexto = `-${fmt(Math.abs(r.delta))}`;
+    } else {
+      cambioTexto = "=";
+    }
+    
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><div class="currency"><img class="flag" src="${r.flag}" alt="${r.code}"> ${r.label}</div></td>
       <td class="rate">${fmt(r.rate)}</td>
-      <td>${r.delta>=0?"+":""}${fmt(r.delta)}</td>
+      <td>${cambioTexto}</td>
       <td><div class="trend ${r.trend}"><i class="fa-solid ${r.trend==="up"?"fa-arrow-up":r.trend==="down"?"fa-arrow-down":"fa-equals"}"></i> ${r.trend==="up"?"Subiendo":r.trend==="down"?"Bajando":"Estable"}</div></td>
     `;
     tbody.appendChild(tr);
@@ -189,50 +365,155 @@ function renderTable(){
 function refreshCalcOptions(){
   const sel = $("#calcCurrency");
   sel.innerHTML="";
-  rows.forEach(r=>{
-    const opt=document.createElement("option");
-    opt.value=r.code; opt.textContent=`${r.code} — ${fmt(r.rate)} CUP`; sel.appendChild(opt);
+  rows.forEach(r => {
+    const opt = document.createElement("option");
+    opt.value = r.code; 
+    opt.textContent = `${r.code} — ${fmt(r.rate)} CUP`; 
+    sel.appendChild(opt);
   });
 }
-$("#calcBtn").addEventListener("click",()=>{
-  const amt=Number($("#calcAmount").value||0);
-  const code=$("#calcCurrency").value;
-  const r=rows.find(x=>x.code===code);
-  if(!r||!amt) return $("#calcResult").textContent="Introduce cantidad y moneda válida";
-  $("#calcResult").textContent=`${fmt(amt / r.rate)} ${r.code} (tasa ${fmt(r.rate)} CUP)`;
+
+$("#calcBtn").addEventListener("click",() => {
+  const amt = Number($("#calcAmount").value || 0);
+  const code = $("#calcCurrency").value;
+  const r = rows.find(x => x.code === code);
+  if (!r || !amt || amt <= 0) {
+    $("#calcResult").innerHTML = `<span>Resultado de la conversión</span><small>Introduce una cantidad válida</small>`;
+    return;
+  }
+  
+  let result, explanation;
+  if (conversionType === "toCurrency") {
+    // Convertir de CUP a divisa
+    result = amt / r.rate;
+    explanation = `${fmt(amt)} CUP = ${fmt(result)} ${r.code}`;
+  } else {
+    // Convertir de divisa a CUP
+    result = amt * r.rate;
+    explanation = `${fmt(amt)} ${r.code} = ${fmt(result)} CUP`;
+  }
+  
+  $("#calcResult").innerHTML = `
+    <span>${explanation}</span>
+    <small>Tasa de cambio: 1 ${r.code} = ${fmt(r.rate)} CUP</small>
+  `;
+});
+
+// Cambiar tipo de conversión
+$$('.conversion-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    $$('.conversion-btn').forEach(b => b.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    conversionType = e.currentTarget.getAttribute('data-type');
+    
+    // Actualizar la etiqueta del campo de cantidad
+    const label = $("#calcAmountLabel");
+    if (conversionType === "toCurrency") {
+      label.textContent = "Cantidad en CUP";
+      $("#calcAmount").placeholder = "Ej: 1000";
+    } else {
+      label.textContent = "Cantidad en divisa";
+      $("#calcAmount").placeholder = "Ej: 100";
+    }
+    
+    // Limpiar resultado
+    $("#calcResult").innerHTML = `<span>Resultado de la conversión</span><small>Selecciona una cantidad y moneda</small>`;
+  });
+});
+
+// También convertir al presionar Enter
+$("#calcAmount").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    $("#calcBtn").click();
+  }
+});
+
+// Modo oscuro
+$("#darkModeToggle").addEventListener("change", (e) => {
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+  }
 });
 
 /* Chart */
 let lineChart;
 function updateChart(){
-  const ctx=$("#lineChart").getContext("2d");
-  const labels=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});});
-  const datasets=rows.slice(0,3).map((r,i)=>{
-    const data=labels.map((_,j)=>Number((r.rate*(1+(Math.sin((j+1)*1.2+i)/100))).toFixed(2)));
-    return {label:r.code,data,tension:0.3,borderWidth:2};
+  const ctx = $("#lineChart").getContext("2d");
+  const labels = Array.from({length:7}, (_,i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (6-i));
+    return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
+  });
+  const datasets = rows.slice(0,3).map((r,i) => {
+    const data = labels.map((_,j) => Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2)));
+    return {label:r.code, data, tension:0.3, borderWidth:2};
   });
   if(lineChart) lineChart.destroy();
-  lineChart=new Chart(ctx,{type:'line',data:{labels,datasets},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
+  lineChart = new Chart(ctx, {type:'line', data:{labels, datasets}, options:{responsive:true, plugins:{legend:{position:'bottom'}}}});
 }
 
 /* Tabs */
 function setActiveTab(tab){
-  $("#tabTable").style.display="none";
-  $("#tabChart").style.display="none";
-  $("#tabCalc").style.display="none";
-  $(".tab.active")?.classList.remove("active"); $(".tab.inactive")?.classList.remove("inactive");
-  if(tab==="table"){$("#tabTable").style.display="block";$("#tabTableBtn").classList.add("active");$("#tabChartBtn").classList.add("inactive");$("#tabCalcBtn").classList.add("inactive");}
-  if(tab==="chart"){$("#tabChart").style.display="block";$("#tabChartBtn").classList.add("active");$("#tabTableBtn").classList.add("inactive");$("#tabCalcBtn").classList.add("inactive");updateChart();}
-  if(tab==="calc"){$("#tabCalc").style.display="block";$("#tabCalcBtn").classList.add("active");$("#tabTableBtn").classList.add("inactive");$("#tabChartBtn").classList.add("inactive");refreshCalcOptions();$("#calcResult").textContent="";}
+  // Ocultar todos los contenidos
+  $("#tabTable").style.display = "none";
+  $("#tabChart").style.display = "none";
+  $("#tabCalc").style.display = "none";
+  $("#tabSettings").style.display = "none";
+  
+  // Restablecer estado de todos los tabs
+  $$(".tab").forEach(t => {
+    t.classList.remove("active");
+    t.classList.add("inactive");
+  });
+  
+  // Activar el tab seleccionado
+  if(tab === "table"){
+    $("#tabTable").style.display = "block";
+    $("#tabTableBtn").classList.remove("inactive");
+    $("#tabTableBtn").classList.add("active");
+  }
+  else if(tab === "chart"){
+    $("#tabChart").style.display = "block";
+    $("#tabChartBtn").classList.remove("inactive");
+    $("#tabChartBtn").classList.add("active");
+    updateChart();
+  }
+  else if(tab === "calc"){
+    $("#tabCalc").style.display = "block";
+    $("#tabCalcBtn").classList.remove("inactive");
+    $("#tabCalcBtn").classList.add("active");
+    refreshCalcOptions();
+  }
+  else if(tab === "settings"){
+    $("#tabSettings").style.display = "block";
+    $("#tabSettingsBtn").classList.remove("inactive");
+    $("#tabSettingsBtn").classList.add("active");
+  }
 }
 
-$("#tabTableBtn").addEventListener("click",()=>setActiveTab("table"));
-$("#tabChartBtn").addEventListener("click",()=>setActiveTab("chart"));
-$("#tabCalcBtn").addEventListener("click",()=>setActiveTab("calc"));
+$("#tabTableBtn").addEventListener("click", () => setActiveTab("table"));
+$("#tabChartBtn").addEventListener("click", () => setActiveTab("chart"));
+$("#tabCalcBtn").addEventListener("click", () => setActiveTab("calc"));
+$("#tabSettingsBtn").addEventListener("click", () => setActiveTab("settings"));
 
-renderTable();
-refreshCalcOptions();
-updateChart();
+// Cargar tema desde localStorage al iniciar
+document.addEventListener('DOMContentLoaded', () => {
+  // Cargar tema
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    $("#darkModeToggle").checked = true;
+  }
+  
+  // Inicializar
+  renderTable();
+  refreshCalcOptions();
+  updateChart();
+});
 </script>
 </body>
 </html>
