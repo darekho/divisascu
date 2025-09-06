@@ -26,9 +26,9 @@
 <!-- Google Site Verification -->
 <meta name="google-site-verification=4vqHwIIaaa0ltOklX277H7_WPZGlyX7cLtiJqbthnJk" />
 
-<!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💱</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💱</text></svg>">
+<!-- Favicon actualizado -->
+<link rel="icon" href="https://divisascu.netlify.app/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="https://divisascu.netlify.app/favicon.ico">
 <link rel="manifest" href="manifest.json">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -68,7 +68,8 @@
 body{font-family:'Inter',system-ui,Arial;background:var(--bg);color:var(--text-primary);transition:background 0.3s, color 0.3s;}
 header{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:14px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border-bottom:2px solid rgba(255,255,255,0.2)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800}
-.logo-img {width:44px;height:44px;background: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-weight: bold;font-size: 20px;color: var(--brand);}
+.logo-img {width:35px;height:35px;background: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-weight: bold;font-size: 20px;color: var(--brand);overflow: hidden;}
+.logo-img img {width: 38px;height: 38px;object-fit: contain;} /* Aumentado de 32px a 38px */
 .logo .name{font-size:1.4rem}
 .logo .small{font-size:0.75rem;color:#fff;opacity:0.9;}
 .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
@@ -80,6 +81,75 @@ header{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-en
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* Botón flotante de usuarios en línea */
+.floating-users {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background: rgba(34, 197, 94, 0.85);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  cursor: default;
+  border: none;
+}
+
+.floating-users:hover {
+  background: rgba(34, 197, 94, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.floating-users i {
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.user-count {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: 5px;
+  position: relative;
+}
+
+/* Efecto de pulso en el fondo del número */
+.user-count::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
 }
 
 .wrap{max-width:480px;margin:16px auto;padding:0 12px}
@@ -106,6 +176,11 @@ tbody td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:middle}
 .trend.up{color:#fff;background:var(--up)}
 .trend.down{color:#fff;background:var(--down)}
 .trend.neutral{color:#fff;background:var(--neutral)}
+
+/* Estilo para la columna de cambio (negrita) */
+.cambio-value {
+  font-weight: 700 !important;
+}
 
 /* Estilos mejorados para la calculadora */
 .calc-container{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
@@ -197,6 +272,15 @@ input:checked + .slider:before {
   .calc-input-group, .calc-btn, .calc-result{grid-column:span 1}
   .conversion-type {flex-direction: column;}
   .logo .name{font-size:1.2rem;}
+  .floating-users {
+    bottom: 15px;
+    right: 15px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+  .user-count {
+    font-size: 1rem;
+  }
 }
 </style>
 </head>
@@ -204,7 +288,7 @@ input:checked + .slider:before {
 
 <header>
   <div class="logo">
-    <div class="logo-img"><i class="fas fa-coins"></i></div>
+    <div class="logo-img"><img src="https://divisascu.netlify.app/logo.png" alt="DivisasCU Logo"></div>
     <div>
       <div class="name">DivisasCU</div>
       <div class="small">MercadoInformal</div>
@@ -217,6 +301,11 @@ input:checked + .slider:before {
     </div>
   </div>
 </header>
+
+<!-- Botón flotante de usuarios en línea -->
+<div class="floating-users">
+  <i class="fas fa-users"></i> <span>En linea:</span> <span id="onlineUsers" class="user-count">23</span>
+</div>
 
 <div class="wrap">
   <div class="accent-line"></div>
@@ -363,6 +452,48 @@ function tickClock(){
 }
 setInterval(tickClock,1000); tickClock();
 
+// Simulación de usuarios en línea
+function simulateOnlineUsers() {
+  const baseUsers = 23;
+  const now = new Date();
+  const hour = now.getHours();
+  const dayOfWeek = now.getDay();
+  
+  // Variación según hora del día (más usuarios en horario laboral)
+  let hourFactor = 1;
+  if (hour >= 9 && hour <= 17) {
+    hourFactor = 1.5; // Horario laboral: más usuarios
+  } else if (hour >= 18 && hour <= 22) {
+    hourFactor = 1.2; // Tarde: usuarios moderados
+  } else {
+    hourFactor = 0.7; // Noche/madrugada: menos usuarios
+  }
+  
+  // Variación según día de la semana (más usuarios entre semana)
+  let dayFactor = 1;
+  if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+    dayFactor = 1.3; // Días laborables: más usuarios
+  } else {
+    dayFactor = 0.8; // Fin de semana: menos usuarios
+  }
+  
+  // Variación aleatoria (pequeñas fluctuaciones)
+  const randomFactor = 0.9 + (Math.random() * 0.2);
+  
+  // Cálculo final
+  let users = Math.round(baseUsers * hourFactor * dayFactor * randomFactor);
+  
+  // Asegurar que no sea menor a 5
+  users = Math.max(5, users);
+  
+  // Actualizar el contedor
+  $("#onlineUsers").textContent = users;
+}
+
+// Iniciar simulación de usuarios
+setInterval(simulateOnlineUsers, 5000);
+simulateOnlineUsers(); // Ejecutar inmediatamente
+
 function renderTable(){
   const tbody = $("#ratesTable tbody");
   tbody.innerHTML = "";
@@ -381,7 +512,7 @@ function renderTable(){
     tr.innerHTML = `
       <td><div class="currency"><img class="flag" src="${r.flag}" alt="${r.code}"> ${r.label}</div></td>
       <td class="rate">${fmt(r.rate)}</td>
-      <td>${cambioTexto}</td>
+      <td class="cambio-value">${cambioTexto}</td>
       <td><div class="trend ${r.trend}"><i class="fa-solid ${r.trend==="up"?"fa-arrow-up":r.trend==="down"?"fa-arrow-down":"fa-equals"}"></i> ${r.trend==="up"?"Subiendo":r.trend==="down"?"Bajando":"Estable"}</div></td>
     `;
     tbody.appendChild(tr);
