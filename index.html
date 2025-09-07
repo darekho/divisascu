@@ -29,50 +29,8 @@
 <meta name="twitter:site" content="@divisascu">
 <meta name="twitter:creator" content="@divisascu">
 
-<!-- LinkedIn -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- Pinterest -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- Instagram (aunque no usa OG tags directamente, es bueno tenerlos) -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- WhatsApp -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- Telegram -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- Discord -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
-<!-- Slack -->
-<meta property="og:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
-<meta property="og:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
-<meta property="og:image" content="https://divisascu.netlify.app/og-image.png">
-<meta property="og:url" content="https://divisascu.netlify.app/">
-
 <!-- Google Site Verification -->
-<meta name="google-site-verification=4vqHwIIaaa0ltOklX277H7_WPZGlyX7cLtiJqbthnJk" />
+<meta name="google-site-verification" content="4vqHwIIaaa0ltOklX277H7_WPZGlyX7cLtiJqbthnJk" />
 
 <!-- Favicon actualizado -->
 <link rel="icon" href="https://divisascu.netlify.app/favicon.ico" type="image/x-icon">
@@ -117,7 +75,7 @@ body{font-family:'Inter',system-ui,Arial;background:var(--bg);color:var(--text-p
 
 /* HEADER MODERNIZADO */
 header {
-  background: linear-gradient(1350deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   color: #ffff;
   padding: 16px 20px;
   display: flex;
@@ -206,7 +164,7 @@ header {
   background: rgba(255, 255, 255, 0.15);
   padding: 8px 16px;
   border-radius: 12px;
-  font-family: 'Digital-7 Mono', monospace;
+  font-family: 'Inter', monospace;
   font-weight: 700;
   font-size: 1.1rem;
   color: #fff;
@@ -838,6 +796,14 @@ input:checked + .slider:before {
   font-size: 1.2rem;
 }
 
+/* Estilos para los gráficos */
+.chart-container {
+  padding: 12px;
+  position: relative;
+  height: 220px;
+  width: 100%;
+}
+
 @media(max-width:480px){
   .rate {
     font-size: 0.8rem;
@@ -897,14 +863,13 @@ input:checked + .slider:before {
   }
   
   .share-buttons {
-    flex-direction: center;
+    flex-direction: column;
     align-items: center;
   }
   
   .share-btn {
     width: 100%;
     max-width: 200px;
-    animation: pulse-banner 2s infinite;
   }
   
   .info-cloud {
@@ -940,6 +905,10 @@ input:checked + .slider:before {
   .clock-box .clock {
     padding: 6px 12px;
     font-size: 1rem;
+  }
+  
+  .chart-container {
+    height: 200px;
   }
 }
 </style>
@@ -1019,12 +988,16 @@ input:checked + .slider:before {
   <!-- Charts -->
   <div id="tabChart" class="card" style="display:none">
     <div class="card-head"><i class="fa-solid fa-chart-line"></i> Gráficos Principales</div>
-    <canvas id="lineChart" height="220" style="padding:12px"></canvas>
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
+    </div>
     
     <!-- Segundo gráfico con monedas CLA, CAD y ZELLE -->
     <div class="card" style="margin-top: 20px;">
       <div class="card-head"><i class="fa-solid fa-chart-line"></i> Otras Divisas</div>
-      <canvas id="secondLineChart" height="220" style="padding:12px"></canvas>
+      <div class="chart-container">
+        <canvas id="secondLineChart"></canvas>
+      </div>
     </div>
   </div>
 
@@ -1161,7 +1134,7 @@ function shareOnWhatsApp() {
   const text = "💰 Consulta las tasas de cambio actualizadas del mercado informal de divisas en Cuba. DivisasCU - Mercado Informal";
   const url = window.location.href;
   const encodedText = encodeURIComponent(text + " " + url);
-  window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+  window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
 }
 
 function shareOnFacebook() {
@@ -1351,7 +1324,8 @@ function updateChart(){
     type: 'line', 
     data: {labels, datasets}, 
     options: {
-      responsive: true, 
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'bottom',
@@ -1402,7 +1376,8 @@ function updateChart(){
     type: 'line', 
     data: {labels, datasets: secondDatasets}, 
     options: {
-      responsive: true, 
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'bottom',
@@ -1481,7 +1456,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar
   renderTable();
   refreshCalcOptions();
-  updateChart();
+  
+  // Inicializar gráficos solo si es necesario
+  if (window.innerWidth > 480) {
+    updateChart();
+  }
+});
+
+// Actualizar gráficos al redimensionar la ventana
+window.addEventListener('resize', function() {
+  if ($("#tabChart").style.display !== "none") {
+    updateChart();
+  }
 });
 </script>
 </body>
