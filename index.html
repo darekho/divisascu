@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>divisasCU — Mercado Informal de Divisas en Cuba</title>
-<meta name="description" content="Tasas de cambio de divisas en Cuba actualizadas. Calculadora de conversion de CUP a USD, EUR, MLC y otras monedas. Mercado informal cubano.">
+<title>DivisasCU</title>
+<meta name="description" content="Mercado Informal de Divisas en Cuba.">
 <meta name="keywords" content="divisas cuba, cambio moneda cuba, cup a usd, euro cuba, mlc, mercado informal cuba, tasa cambio cuba, dollar cuba, el toque, el toke, eltoque">
 <meta name="author" content="divisasCU">
 <meta name="robots" content="index, follow">
@@ -114,17 +114,110 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,Arial;background:var(--bg);color:var(--text-primary);transition:background 0.3s, color 0.3s;}
-header{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:14px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border-bottom:2px solid rgba(255,255,255,0.2)}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800}
-.logo-img {width:35px;height:35px;background: white;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-weight: bold;font-size: 20px;color: var(--brand);overflow: hidden;}
-.logo-img img {width: 38px;height: 38px;object-fit: contain;} /* Aumentado de 32px a 38px */
-.logo .name{font-size:1.4rem}
-.logo .small{font-size:0.75rem;color:#fff;opacity:0.9;}
-.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.clock-box{text-align:center;margin-right:10px}
-.clock-box .title{font-size:0.7rem;color:#fff;text-transform:uppercase;letter-spacing:0.5px}
-.clock-box .clock{background:rgba(255,255,255,0.2);padding:6px 12px;border-radius:8px;font-family:'Digital-7 Mono', monospace;font-weight:700;font-size:1rem;color:#fff}
-.clock-box .clock .blink{animation: blink 1s infinite;}
+
+/* HEADER MODERNIZADO */
+header {
+  background: linear-gradient(1350deg, var(--gradient-start), var(--gradient-end));
+  color: #ffff;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 16px 16px;
+  margin: 0 12px;
+  max-width: calc(100% - 24px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  z-index: 10;
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--brand);
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: rotate(10deg);
+}
+
+.logo-img img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.logo .name {
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  background: linear-gradient(to right, #fff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.logo .small {
+  font-size: 0.70rem;
+  color: #e0e7ff;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.clock-box {
+  text-align: center;
+  margin-right: 0;
+}
+
+.clock-box .title {
+  font-size: 0.7rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+.clock-box .clock {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-family: 'Digital-7 Mono', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.clock-box .clock .blink {
+  animation: blink 1s infinite;
+}
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
@@ -200,30 +293,179 @@ header{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-en
   }
 }
 
-.wrap{max-width:480px;margin:16px auto;padding:0 12px}
-.accent-line{height:6px;background:linear-gradient(90deg,var(--gradient-start),var(--accent),var(--gradient-end));border-radius:6px;margin-bottom:14px}
+.wrap {
+  max-width: 480px;
+  margin: 16px auto;
+  padding: 0 12px;
+}
 
-.tabs{display:flex;justify-content:center;gap:8px;padding:12px 0;overflow-x:auto;flex-wrap: nowrap;}
-.tab{padding:10px 16px;border-radius:12px;font-weight:700;cursor:pointer;flex-shrink:0;font-size:0.9rem;text-align:center;transition:all 0.2s;min-width: 80px;}
-.tab.active{background:var(--tab-active-bg);color:var(--tab-active-color);box-shadow:0 4px 10px rgba(0,0,0,0.2)}
-.tab.inactive{background:var(--tab-inactive-bg);color:var(--tab-inactive-color)}
+/* Banner de desarrollo */
+.dev-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #ff6b35, #f7931e, #ff6b35);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+  animation: pulse-banner 2s infinite;
+}
 
-.card{background:var(--card);border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,0.12);overflow:hidden;margin-bottom:18px;transition:all 0.3s}
-.card:hover{transform:translateY(-2px)}
-.card-head{background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;padding:12px 16px;font-weight:700;display:flex;align-items:center;font-size:1rem;border-bottom:1px solid rgba(255,255,255,0.2)}
-.card-head div:first-child{display:flex;align-items:center;gap:8px;}
-.table-wrap{overflow-x:auto;padding:12px}
-table{width:100%;border-collapse:collapse;font-size:0.85rem}
-thead th{background:var(--bg);padding:10px;text-align:left;color:var(--muted);font-weight:700;border-bottom:2px solid var(--bg)}
-tbody td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:middle}
-.currency{display:flex;align-items:center;gap:8px;font-weight:700}
-.flag{width:28px;height:18px;object-fit:cover;border-radius:3px}
-.rate{font-weight:700;color:var(--brand);}
-[data-theme="dark"] .rate{color:var(--rate-color);} /* Color especial para modo oscuro */
-.trend{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;font-weight:700;font-size:0.75rem}
-.trend.up{color:#fff;background:var(--up)}
-.trend.down{color:#fff;background:var(--down)}
-.trend.neutral{color:#fff;background:var(--neutral)}
+.dev-banner i {
+  font-size: 1.1rem;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes pulse-banner {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 0;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.tab {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s;
+  min-width: 80px;
+}
+
+.tab.active {
+  background: var(--tab-active-bg);
+  color: var(--tab-active-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab.inactive {
+  background: var(--tab-inactive-bg);
+  color: var(--tab-inactive-color);
+}
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  margin-bottom: 18px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-head {
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: #fff;
+  padding: 12px 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-head div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  padding: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead th {
+  background: var(--bg);
+  padding: 10px;
+  text-align: left;
+  color: var(--muted);
+  font-weight: 700;
+  border-bottom: 2px solid var(--bg);
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid var(--bg);
+  vertical-align: middle;
+}
+
+.currency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.flag {
+  width: 28px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.rate {
+  font-weight: 700;
+  color: var(--brand);
+}
+
+[data-theme="dark"] .rate {
+  color: var(--rate-color);
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.trend.up {
+  color: #fff;
+  background: var(--up);
+}
+
+.trend.down {
+  color: #fff;
+  background: var(--down);
+}
+
+.trend.neutral {
+  color: #fff;
+  background: var(--neutral);
+}
 
 /* Estilo para la columna de cambio (negrita) */
 .cambio-value {
@@ -231,28 +473,234 @@ tbody td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:middle}
 }
 
 /* Estilos mejorados para la calculadora */
-.calc-container{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
-.calc-input-group{grid-column:span 2}
-.calc-input-group label{display:block;margin-bottom:6px;font-weight:600;color:var(--muted);font-size:0.9rem}
-.calc-input, .calc-select{padding:12px;border-radius:12px;border:2px solid var(--tab-inactive-bg);width:100%;font-weight:600;transition:all 0.2s;background:var(--card);color:var(--text-primary)}
-.calc-input:focus, .calc-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,53,0.2)}
-.calc-btn{grid-column:span 2;background:var(--accent);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;justify-content:center;align-items:center;gap:8px}
-.calc-btn:hover{background:#ff914d;transform:translateY(-2px);box-shadow:0 4px 12px rgba(255,107,53,0.3)}
-.calc-result{grid-column:span 2;margin-top:12px;padding:16px;background:var(--bg);border-radius:12px;text-align:center;font-weight:700;font-size:1.1rem;color:var(--brand);display:flex;flex-direction:column;gap:4px}
-.calc-result small{font-size:0.8rem;color:var(--muted);font-weight:500}
-.conversion-type {display: flex;gap: 10px;margin-bottom: 12px;}
-.conversion-btn {flex: 1;padding: 10px;border-radius: 10px;border: 2px solid var(--tab-inactive-bg);background: var(--card);color: var(--text-primary);font-weight: 600;cursor: pointer;text-align: center;transition: all 0.2s;}
-.conversion-btn.active {background: var(--accent);color: white;border-color: var(--accent);}
+.calc-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
+}
 
-/* Estilos mejorados para el texto informativo */
-.info-text{font-family:'Roboto Flex', sans-serif;padding:1.5rem;line-height:1.6}
-.info-text p{margin-bottom:1rem;font-size:0.95rem;color:var(--text-secondary);font-weight:400}
-.info-text strong{font-weight:600;color:var(--brand)}
-.info-text p:last-child{margin-bottom:0}
+.calc-input-group {
+  grid-column: span 2;
+}
+
+.calc-input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.calc-input, .calc-select {
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--tab-inactive-bg);
+  width: 100%;
+  font-weight: 600;
+  transition: all 0.2s;
+  background: var(--card);
+  color: var(--text-primary);
+}
+
+.calc-input:focus, .calc-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.calc-btn {
+  grid-column: span 2;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-btn:hover {
+  background: #ff914d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.calc-result {
+  grid-column: span 2;
+  margin-top: 12px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--brand);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calc-result small {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.conversion-type {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.conversion-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--tab-inactive-bg);
+  background: var(--card);
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.conversion-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* SECCIÓN DE INFORMACIÓN EN FORMA DE NUBE MODERNA */
+.info-cloud {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.info-cloud::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -30px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, rgba(10, 42, 106, 0.1), rgba(255, 107, 53, 0.1));
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.info-cloud::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(10, 42, 106, 0.1));
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.info-cloud-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.info-cloud-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(10, 42, 106, 0.3);
+}
+
+.info-cloud-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand);
+  background: linear-gradient(to right, var(--gradient-start), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-cloud-content {
+  position: relative;
+  z-index: 1;
+}
+
+.info-cloud-text {
+  font-family: 'Roboto Flex', sans-serif;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.info-cloud-text::before {
+  content: '•';
+  color: var(--accent);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 1.2rem;
+}
+
+.info-cloud-note {
+  background: linear-gradient(to right, rgba(255, 107, 53, 0.1), rgba(10, 42, 106, 0.1));
+  border-left: 4px solid var(--accent);
+  padding: 14px;
+  border-radius: 0 12px 12px 0;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.info-cloud-note strong {
+  color: var(--accent);
+  font-weight: 700;
+}
 
 /* Footer mejorado */
-footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:12px;padding:8px;display:flex;justify-content:center;align-items:center;gap:6px}
-footer .update-info{display:flex;align-items:center;gap:4px}
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-top: 12px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+footer .update-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 
 .setting-item {
   display: flex;
@@ -312,21 +760,185 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
+/* Segundo gráfico */
+.second-chart {
+  margin-top: 20px;
+}
+
+/* Sección de compartir - MEJORADA */
+.share-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.share-header {
+  background: linear-gradient(90deg, #ff6b35, #f7931e, #ff6b35);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px 12px 0 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.share-header i {
+  font-size: 1.1rem;
+}
+
+.share-content {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  flex: 1;
+  max-width: 160px;
+}
+
+.share-btn.whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+}
+
+.share-btn.facebook {
+  background: linear-gradient(135deg, #3b5998, #1877F2);
+  color: white;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.share-btn i {
+  font-size: 1.2rem;
+}
+
 @media(max-width:480px){
-  .rate{font-size:0.8rem}
-  .flag{width:24px;height:16px}
-  .tab{padding:8px 12px;font-size:0.8rem;min-width: 70px;}
-  .calc-container{grid-template-columns:1fr}
-  .calc-input-group, .calc-btn, .calc-result{grid-column:span 1}
-  .conversion-type {flex-direction: column;}
-  .logo .name{font-size:1.2rem;}
+  .rate {
+    font-size: 0.8rem;
+  }
+  
+  .flag {
+    width: 24px;
+    height: 16px;
+  }
+  
+  .tab {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-width: 70px;
+  }
+  
+  .calc-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .calc-input-group, .calc-btn, .calc-result {
+    grid-column: span 1;
+  }
+  
+  .conversion-type {
+    flex-direction: column;
+  }
+  
+  .logo .name {
+    font-size: 1.2rem;
+  }
+  
   .floating-users {
     bottom: 15px;
     right: 15px;
     font-size: 0.8rem;
     padding: 8px 12px;
   }
+  
   .user-count {
+    font-size: 1rem;
+  }
+  
+  .share-btn {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+    max-width: 140px;
+  }
+  
+  .share-btn i {
+    font-size: 1.1rem;
+  }
+  
+  .dev-banner {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+  
+  .share-buttons {
+    flex-direction: center;
+    align-items: center;
+  }
+  
+  .share-btn {
+    width: 100%;
+    max-width: 200px;
+    animation: pulse-banner 2s infinite;
+  }
+  
+  .info-cloud {
+    padding: 18px;
+  }
+  
+  .info-cloud-title {
+    font-size: 1.1rem;
+  }
+  
+  .info-cloud-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  header {
+    padding: 14px 16px;
+    margin: 0 8px;
+    max-width: calc(100% - 16px);
+  }
+  
+  .logo-img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .logo-img img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .clock-box .clock {
+    padding: 6px 12px;
     font-size: 1rem;
   }
 }
@@ -344,8 +956,8 @@ input:checked + .slider:before {
   </div>
   <div class="controls">
     <div class="clock-box">
-      <div class="title">Hora</div>
-      <div id="clock" class="clock">00<span class="blink">:</span>00</div>
+      <div class="title">Time</div>
+      <div id="clock" class="clock">00<span class="blink">:</span>00<span class="ampm"> AM</span></div>
     </div>
   </div>
 </header>
@@ -356,7 +968,11 @@ input:checked + .slider:before {
 </div>
 
 <div class="wrap">
-  <div class="accent-line"></div>
+  <!-- Banner de desarrollo -->
+  <div class="dev-banner">
+    <i class="fas fa-cog"></i>
+    <span>Sitio Web en Desarrollo</span>
+  </div>
 
   <div class="tabs">
     <div id="tabTableBtn" class="tab active">TABLA</div>
@@ -380,10 +996,36 @@ input:checked + .slider:before {
     </div>
   </div>
 
+  <!-- Sección de compartir MEJORADA -->
+  <div class="share-section">
+    <div class="share-header">
+      <i class="fas fa-share-alt"></i>
+      <span>COMPARTIR PÁGINA</span>
+    </div>
+    <div class="share-content">
+      <div class="share-buttons">
+        <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </button>
+        <button class="share-btn facebook" onclick="shareOnFacebook()">
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Charts -->
   <div id="tabChart" class="card" style="display:none">
-    <div class="card-head"><i class="fa-solid fa-chart-line"></i> Gráficos</div>
+    <div class="card-head"><i class="fa-solid fa-chart-line"></i> Gráficos Principales</div>
     <canvas id="lineChart" height="220" style="padding:12px"></canvas>
+    
+    <!-- Segundo gráfico con monedas CLA, CAD y ZELLE -->
+    <div class="card" style="margin-top: 20px;">
+      <div class="card-head"><i class="fa-solid fa-chart-line"></i> Otras Divisas</div>
+      <canvas id="secondLineChart" height="220" style="padding:12px"></canvas>
+    </div>
   </div>
 
   <!-- Calculadora mejorada -->
@@ -444,14 +1086,23 @@ input:checked + .slider:before {
     </div>
   </div>
 
-  <!-- Information card -->
-  <div class="card">
-    <div class="card-head">
-      <i class="fas fa-info-circle"></i> INFORMACION IMPORTANTE</div>
+  <!-- Information card - Diseño moderno tipo nube -->
+  <div class="info-cloud">
+    <div class="info-cloud-header">
+      <div class="info-cloud-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <h2 class="info-cloud-title">INFORMACIÓN IMPORTANTE</h2>
+    </div>
     
-    <div class="info-text">
-      <p>En este sitio encontrarás información sobre las tasas de cambio de divisas en Cuba, basada específicamente en el mercado informal y en los grupos de compra y venta que operan en todo el país. Te ofrecemos datos actualizados y confiables. Además, puedes usar nuestra herramienta para calcular de forma fácil y segura el valor de tu dinero en diferentes monedas.</p>
-      <p><strong>NOTA:</strong> Las tasas de cambio pueden variar según la región y las condiciones del mercado.</p>
+    <div class="info-cloud-content">
+      <p class="info-cloud-text">En este sitio encontrarás información sobre las tasas de cambio de divisas en Cuba, basada específicamente en el mercado informal y en los grupos de compra y venta que operan en todo el país.</p>
+      
+      <p class="info-cloud-text">Te ofrecemos datos actualizados y confiables. Además, puedes usar nuestra herramienta para calcular de forma fácil y segura el valor de tu dinero en diferentes monedas.</p>
+      
+      <div class="info-cloud-note">
+        <strong>NOTA:</strong> Las tasas de cambio pueden variar según la región y las condiciones del mercado.
+      </div>
     </div>
   </div>
 
@@ -492,9 +1143,35 @@ const fmt = n => {
   return num % 1 === 0 ? num.toString() : num.toLocaleString("es-ES", {minimumFractionDigits:2,maximumFractionDigits:2});
 };
 
+// Función para formatear la hora en formato de 12 horas
+function formatTime12Hour(date) {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+  hours = hours % 12;
+  hours = hours ? hours : 12; // La hora 0 debe ser 12
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  
+  return `${hours}:${minutes} ${ampm}`;
+}
+
+// Funciones para compartir - CORREGIDAS
+function shareOnWhatsApp() {
+  const text = "💰 Consulta las tasas de cambio actualizadas del mercado informal de divisas en Cuba. DivisasCU - Mercado Informal";
+  const url = window.location.href;
+  const encodedText = encodeURIComponent(text + " " + url);
+  window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+}
+
+function shareOnFacebook() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+}
+
 function tickClock(){
   const now = new Date();
-  const timeStr = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  const timeStr = formatTime12Hour(now);
   $("#clock").innerHTML = timeStr.replace(':', '<span class="blink">:</span>');
   $("#lastDate").textContent = now.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
 }
@@ -645,8 +1322,10 @@ $("#darkModeToggle").addEventListener("change", (e) => {
   }
 });
 
-/* Chart */
+/* Charts */
 let lineChart;
+let secondLineChart;
+
 function updateChart(){
   const ctx = $("#lineChart").getContext("2d");
   const labels = Array.from({length:7}, (_,i) => {
@@ -654,12 +1333,87 @@ function updateChart(){
     d.setDate(d.getDate() - (6-i));
     return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
   });
+  
   const datasets = rows.slice(0,3).map((r,i) => {
     const data = labels.map((_,j) => Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2)));
-    return {label:r.code, data, tension:0.3, borderWidth:2};
+    return {
+      label: r.code, 
+      data, 
+      tension: 0.3, 
+      borderWidth: 2,
+      borderColor: ['#3B82F6', '#EF4444', '#10B981'][i],
+      backgroundColor: ['#3B82F6', '#EF4444', '#10B981'][i] + '20'
+    };
   });
+  
   if(lineChart) lineChart.destroy();
-  lineChart = new Chart(ctx, {type:'line', data:{labels, datasets}, options:{responsive:true, plugins:{legend:{position:'bottom'}}}});
+  lineChart = new Chart(ctx, {
+    type: 'line', 
+    data: {labels, datasets}, 
+    options: {
+      responsive: true, 
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            padding: 20
+          }
+        }
+      }
+    }
+  });
+  
+  // Segundo gráfico con monedas CLA, CAD y ZELLE
+  const secondCtx = $("#secondLineChart").getContext("2d");
+  const claData = rows.find(r => r.code === "CLA");
+  const cadData = rows.find(r => r.code === "CAD");
+  const zelleData = rows.find(r => r.code === "ZELLE");
+  
+  const secondDatasets = [
+    {
+      label: claData.code, 
+      data: labels.map((_,j) => Number((claData.rate * (1 + (Math.cos((j+1)*0.8)/80))).toFixed(2))),
+      tension: 0.3, 
+      borderWidth: 2,
+      borderColor: '#8B5CF6',
+      backgroundColor: '#8B5CF620'
+    },
+    {
+      label: cadData.code, 
+      data: labels.map((_,j) => Number((cadData.rate * (1 + (Math.sin((j+1)*0.9)/90))).toFixed(2))),
+      tension: 0.3, 
+      borderWidth: 2,
+      borderColor: '#F59E0B',
+      backgroundColor: '#F59E0B20'
+    },
+    {
+      label: zelleData.code, 
+      data: labels.map((_,j) => Number((zelleData.rate * (1 + (Math.cos((j+1)*1.1)/70))).toFixed(2))),
+      tension: 0.3, 
+      borderWidth: 2,
+      borderColor: '#EC4899',
+      backgroundColor: '#EC489920'
+    }
+  ];
+  
+  if(secondLineChart) secondLineChart.destroy();
+  secondLineChart = new Chart(secondCtx, {
+    type: 'line', 
+    data: {labels, datasets: secondDatasets}, 
+    options: {
+      responsive: true, 
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            padding: 20
+          }
+        }
+      }
+    }
+  });
 }
 
 /* Tabs */
@@ -669,6 +1423,15 @@ function setActiveTab(tab){
   $("#tabChart").style.display = "none";
   $("#tabCalc").style.display = "none";
   $("#tabSettings").style.display = "none";
+  
+  // Mostrar u ocultar el anuncio informativo según la pestaña
+  if (tab === "table") {
+    document.querySelector('.info-cloud').style.display = 'block';
+    document.querySelector('.share-section').style.display = 'block';
+  } else {
+    document.querySelector('.info-cloud').style.display = 'none';
+    document.querySelector('.share-section').style.display = 'none';
+  }
   
   // Restablecer estado de todos los tabs
   $$(".tab").forEach(t => {
