@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_ES">
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary_large image">
 <meta name="twitter:title" content="divisasCU — Mercado Informal de Divisas en Cuba">
 <meta name="twitter:description" content="💰 Tasas de cambio actualizadas en Cuba. Calculadora de CUP a USD, EUR, MLC. Mercado informal cubano en tiempo real.">
 <meta name="twitter:image" content="https://divisascu.netlify.app/og-image.png">
@@ -287,6 +287,64 @@ header {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Nueva sección de promoción */
+.promotion-section {
+  background: linear-gradient(135deg, #1a2f6b, #2c5282);
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.promotion-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.promotion-header i {
+  font-size: 1.5rem;
+  color: #ff6b35;
+}
+
+.promotion-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.promotion-description {
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.promotion-btn {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.promotion-btn:hover {
+  background: #ff914d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
 .tabs {
@@ -804,6 +862,143 @@ input:checked + .slider:before {
   width: 100%;
 }
 
+/* ESTILOS PARA EL SISTEMA DE ANUNCIOS MODIFICADO */
+.ad-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  overflow: hidden;
+  display: none;
+  animation: slideDown 0.5s ease-out;
+  border-left: 5px solid #3498db;
+}
+
+@keyframes slideDown {
+  from { transform: translate(-50%, -100px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.ad-header {
+  background: #f8f9fa;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.ad-header h3 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.close-ad {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  display: none;
+}
+
+.close-ad:hover {
+  color: #333;
+}
+
+.countdown-timer {
+  position: absolute;
+  right: 15px;
+  background: #ff6b35;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.ad-content {
+  padding: 20px;
+}
+
+.ad-title {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.ad-image {
+  width: 100%;
+  height: 180px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ad-description {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.ad-cta {
+  display: inline-block;
+  background: #3498db;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: 100%;
+  text-align: center;
+}
+
+.ad-cta:hover {
+  background: #2980b9;
+}
+
+.ad-footer {
+  padding: 10px 20px;
+  background: #f8f9fa;
+  text-align: right;
+  font-size: 0.9rem;
+  color: #888;
+  border-top: 1px solid #eee;
+}
+
+/* Clase para bloquear el scroll cuando el anuncio está abierto */
+.body-no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
 @media(max-width:480px){
   .rate {
     font-size: 0.8rem;
@@ -910,6 +1105,33 @@ input:checked + .slider:before {
   .chart-container {
     height: 200px;
   }
+  
+  /* Ajustes responsivos para anuncios */
+  .ad-container {
+    width: 95%;
+  }
+  
+  .ad-image {
+    height: 150px;
+  }
+  
+  /* Ajustes para la sección de promoción */
+  .promotion-section {
+    padding: 15px;
+  }
+  
+  .promotion-title {
+    font-size: 1.1rem;
+  }
+  
+  .promotion-description {
+    font-size: 0.85rem;
+  }
+  
+  .promotion-btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
 }
 </style>
 </head>
@@ -941,6 +1163,18 @@ input:checked + .slider:before {
   <div class="dev-banner">
     <i class="fas fa-cog"></i>
     <span>Sitio Web en Desarrollo</span>
+  </div>
+
+  <!-- Nueva sección de promoción -->
+  <div class="promotion-section">
+    <div class="promotion-header">
+      <i class="fas fa-bullhorn"></i>
+      <h2 class="promotion-title">Promociona tu negocio aquí</h2>
+    </div>
+    <p class="promotion-description">Si quieres darle más visibilidad a tu negocio contáctenos via GMAIL, tenemos los mejores precios</p>
+    <a href="mailto:divisascubanas@gmail.com?subject=Promoción de negocio&body=Hola, me interesa promocionar mi negocio en DivisasCU" class="promotion-btn">
+      <i class="fas fa-envelope"></i> Contactar
+    </a>
   </div>
 
   <div class="tabs">
@@ -1087,6 +1321,29 @@ input:checked + .slider:before {
   </footer>
 </div>
 
+<!-- Contenedor de anuncios MODIFICADO -->
+<div class="ad-container" id="adContainer">
+  <div class="ad-header">
+    <h3>Anuncio Patrocinado</h3>
+    <button class="close-ad" id="closeAd">&times;</button>
+    <div class="countdown-timer" id="countdownTimer">10</div>
+  </div>
+  <div class="ad-content">
+    <h2 class="ad-title" id="adTitle">CiberCuba Noticias</h2>
+    
+    <div class="ad-image">
+      <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/35/fe/cf/35fecf49-188e-1384-2eda-89c9f392dde1/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/1200x630wa.png" alt="Servicio de cambio de divisas">
+    </div>
+    
+    <p class="ad-description" id="adDescription">La fuente definitiva para estar bien informado sobre la actualidad de Cuba, con una cobertura integral de lo que acontece tanto dentro de la isla como en la comunidad cubana en el exterior.</p>
+    
+    <a href="https://www.cibercuba.com/" class="ad-cta" id="adCta" target="_blank">VISITAR</a>
+  </div>
+  <div class="ad-footer">
+    Anuncio • <span id="currentDate"></span>
+  </div>
+</div>
+
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
@@ -1106,6 +1363,11 @@ const defaultRows = [
 let rows = JSON.parse(JSON.stringify(defaultRows));
 let filteredRows = [...rows];
 let conversionType = "toCurrency"; // "toCurrency" or "toCUP"
+
+// Variables para el sistema de anuncios
+let adInterval;
+let countdownInterval;
+let countdownValue = 10;
 
 /* Utils */
 const $ = s => document.querySelector(s);
@@ -1147,6 +1409,13 @@ function tickClock(){
   const timeStr = formatTime12Hour(now);
   $("#clock").innerHTML = timeStr.replace(':', '<span class="blink">:</span>');
   $("#lastDate").textContent = now.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});
+  
+  // Actualizar la fecha en el anuncio
+  $("#currentDate").textContent = now.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
 }
 setInterval(tickClock,1000); tickClock();
 
@@ -1444,6 +1713,67 @@ $("#tabChartBtn").addEventListener("click", () => setActiveTab("chart"));
 $("#tabCalcBtn").addEventListener("click", () => setActiveTab("calc"));
 $("#tabSettingsBtn").addEventListener("click", () => setActiveTab("settings"));
 
+/* SISTEMA DE ANUNCIOS MODIFICADO */
+// Elementos DOM para anuncios
+const adContainer = document.getElementById('adContainer');
+const adTitle = document.getElementById('adTitle');
+const adDescription = document.getElementById('adDescription');
+const adCta = document.getElementById('adCta');
+const closeAd = document.getElementById('closeAd');
+const countdownTimer = document.getElementById('countdownTimer');
+
+// Función para bloquear/desbloquear el scroll
+function toggleBodyScroll(lock) {
+  if (lock) {
+    document.body.classList.add('body-no-scroll');
+  } else {
+    document.body.classList.remove('body-no-scroll');
+  }
+}
+
+// Iniciar cuenta regresiva
+function startCountdown() {
+  countdownValue = 10;
+  countdownTimer.textContent = countdownValue;
+  countdownTimer.style.display = 'flex';
+  closeAd.style.display = 'none';
+  
+  countdownInterval = setInterval(() => {
+    countdownValue--;
+    countdownTimer.textContent = countdownValue;
+    
+    if (countdownValue <= 0) {
+      clearInterval(countdownInterval);
+      countdownTimer.style.display = 'none';
+      closeAd.style.display = 'block';
+    }
+  }, 1000);
+}
+
+// Mostrar el anuncio
+function showAd() {
+  adContainer.style.display = 'block';
+  toggleBodyScroll(true); // Bloquear scroll
+  startCountdown();
+}
+
+// Cerrar el anuncio manualmente
+closeAd.addEventListener('click', () => {
+  adContainer.style.display = 'none';
+  toggleBodyScroll(false); // Desbloquear scroll
+});
+
+// Iniciar el sistema de anuncios
+function startAdSystem() {
+  // Mostrar el primer anuncio después de 1 minuto (60000 ms)
+  setTimeout(() => {
+    showAd();
+    
+    // Programar anuncios cada 10 minutos (600000 ms)
+    adInterval = setInterval(showAd, 600000);
+  }, 60000);
+}
+
 // Cargar tema desde localStorage al iniciar
 document.addEventListener('DOMContentLoaded', () => {
   // Cargar tema
@@ -1456,6 +1786,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar
   renderTable();
   refreshCalcOptions();
+  
+  // Iniciar el sistema de anuncios
+  startAdSystem();
   
   // Inicializar gráficos solo si es necesario
   if (window.innerWidth > 480) {
