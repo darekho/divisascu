@@ -92,14 +92,14 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
   font-weight: 800;
   z-index: 10;
 }
 
 .logo-img {
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   background: white;
   border-radius: 50%;
   display: flex;
@@ -118,8 +118,8 @@ header {
 }
 
 .logo-img img {
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
 
@@ -398,7 +398,7 @@ header {
   padding: 12px 16px;
   font-weight: 700;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   font-size: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -593,25 +593,25 @@ tbody td {
   border-color: var(--accent);
 }
 
-/* SECCIÓN DE INFORMACIÓN EN FORMA DE NUBE MODERNA */
+/* SECCIÓN DE INFORMACIÓN EN FORMA DE NUBE MODERNA - COMPACTA */
 .info-cloud {
   background: var(--card);
-  border-radius: 20px;
-  padding: 24px;
-  margin-bottom: 20px;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .info-cloud::before {
   content: '';
   position: absolute;
-  top: -50px;
-  right: -30px;
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(135deg, rgba(10, 42, 106, 0.1), rgba(255, 107, 53, 0.1));
+  top: -40px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(10, 42, 106, 0.08), rgba(255, 107, 53, 0.08));
   border-radius: 50%;
   z-index: 0;
 }
@@ -619,11 +619,11 @@ tbody td {
 .info-cloud::after {
   content: '';
   position: absolute;
-  bottom: -40px;
-  left: -20px;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(10, 42, 106, 0.1));
+  bottom: -30px;
+  left: -15px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(10, 42, 106, 0.08));
   border-radius: 50%;
   z-index: 0;
 }
@@ -631,27 +631,27 @@ tbody td {
 .info-cloud-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 10px;
+  margin-bottom: 14px;
   position: relative;
   z-index: 1;
 }
 
 .info-cloud-icon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 10px rgba(10, 42, 106, 0.3);
+  font-size: 1rem;
+  box-shadow: 0 3px 8px rgba(10, 42, 106, 0.2);
 }
 
 .info-cloud-title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--brand);
   background: linear-gradient(to right, var(--gradient-start), var(--accent));
@@ -666,12 +666,12 @@ tbody td {
 
 .info-cloud-text {
   font-family: 'Roboto Flex', sans-serif;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-secondary);
-  margin-bottom: 16px;
-  font-size: 0.95rem;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
   position: relative;
-  padding-left: 20px;
+  padding-left: 16px;
 }
 
 .info-cloud-text::before {
@@ -681,17 +681,18 @@ tbody td {
   display: inline-block;
   width: 1em;
   margin-left: -1em;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .info-cloud-note {
-  background: linear-gradient(to right, rgba(255, 107, 53, 0.1), rgba(10, 42, 106, 0.1));
-  border-left: 4px solid var(--accent);
-  padding: 14px;
-  border-radius: 0 12px 12px 0;
-  margin-top: 20px;
+  background: linear-gradient(to right, rgba(255, 107, 53, 0.08), rgba(10, 42, 106, 0.08));
+  border-left: 3px solid var(--accent);
+  padding: 12px;
+  border-radius: 0 10px 10px 0;
+  margin-top: 16px;
   position: relative;
   z-index: 1;
+  font-size: 0.85rem;
 }
 
 .info-cloud-note strong {
@@ -776,63 +777,51 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Segundo gráfico */
-.second-chart {
-  margin-top: 20px;
-}
-
-/* Sección de compartir - MEJORADA */
+/* Sección de compartir - MEJORADA Y MINIMALISTA */
 .share-section {
-  margin: 20px 0;
+  margin: 18px 0;
   text-align: center;
-}
-
-.share-header {
-  background: linear-gradient(90deg, #ff6b35, #f7931e, #ff6b35);
-  color: white;
-  padding: 12px 16px;
-  border-radius: 12px 12px 0 0;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1rem;
-  margin-bottom: 0;
-}
-
-.share-header i {
-  font-size: 1.1rem;
 }
 
 .share-content {
   background: var(--card);
   padding: 16px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.share-title {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-weight: 600;
 }
 
 .share-buttons {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 8px;
+  flex-wrap: wrap;
 }
 
 .share-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   border: none;
-  flex: 1;
-  max-width: 160px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.share-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
 }
 
 .share-btn.whatsapp {
@@ -845,13 +834,41 @@ input:checked + .slider:before {
   color: white;
 }
 
-.share-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.share-btn.messenger {
+  background: linear-gradient(135deg, #0084ff, #00c6ff);
+  color: white;
 }
 
-.share-btn i {
-  font-size: 1.2rem;
+.share-btn.telegram {
+  background: linear-gradient(135deg, #0088cc, #2AABEE);
+  color: white;
+}
+
+.share-btn.link {
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  color: white;
+}
+
+.share-btn .tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  bottom: -25px;
 }
 
 /* Estilos para los gráficos */
@@ -1042,43 +1059,38 @@ input:checked + .slider:before {
     font-size: 1rem;
   }
   
-  .share-btn {
-    padding: 9px 12px;
-    font-size: 0.85rem;
-    max-width: 140px;
-  }
-  
-  .share-btn i {
-    font-size: 1.1rem;
-  }
-  
   .dev-banner {
     font-size: 0.8rem;
     padding: 8px 12px;
   }
   
   .share-buttons {
-    flex-direction: column;
-    align-items: center;
+    gap: 10px;
   }
   
   .share-btn {
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  .info-cloud {
-    padding: 18px;
-  }
-  
-  .info-cloud-title {
+    width: 45px;
+    height: 45px;
     font-size: 1.1rem;
   }
   
-  .info-cloud-icon {
-    width: 40px;
-    height: 40px;
+  .info-cloud {
+    padding: 16px;
+  }
+  
+  .info-cloud-title {
     font-size: 1rem;
+  }
+  
+  .info-cloud-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  
+  .info-cloud-text {
+    font-size: 0.85rem;
+    padding-left: 14px;
   }
   
   header {
@@ -1171,7 +1183,7 @@ input:checked + .slider:before {
       <i class="fas fa-bullhorn"></i>
       <h2 class="promotion-title">Promociona tu negocio aquí</h2>
     </div>
-    <p class="promotion-description">Si quieres darle más visibilidad a tu negocio contáctenos via GMAIL, tenemos los mejores precios</p>
+    <p class="promotion-description">Potencie su negocio con anuncios estratégicos en nuestra web de alto tráfico. Llevamos su mensaje directo a su audiencia ideal aumentando su visibilidad. No dude en escribirnos.</p>
     <a href="mailto:divisascubanas@gmail.com?subject=Promoción de negocio&body=Hola, me interesa promocionar mi negocio en DivisasCU" class="promotion-btn">
       <i class="fas fa-envelope"></i> Contactar
     </a>
@@ -1199,39 +1211,11 @@ input:checked + .slider:before {
     </div>
   </div>
 
-  <!-- Sección de compartir MEJORADA -->
-  <div class="share-section">
-    <div class="share-header">
-      <i class="fas fa-share-alt"></i>
-      <span>COMPARTIR PÁGINA</span>
-    </div>
-    <div class="share-content">
-      <div class="share-buttons">
-        <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
-          <i class="fab fa-whatsapp"></i>
-          <span>WhatsApp</span>
-        </button>
-        <button class="share-btn facebook" onclick="shareOnFacebook()">
-          <i class="fab fa-facebook-f"></i>
-          <span>Facebook</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- Charts -->
   <div id="tabChart" class="card" style="display:none">
     <div class="card-head"><i class="fa-solid fa-chart-line"></i> Gráficos Principales</div>
     <div class="chart-container">
       <canvas id="lineChart"></canvas>
-    </div>
-    
-    <!-- Segundo gráfico con monedas CLA, CAD y ZELLE -->
-    <div class="card" style="margin-top: 20px;">
-      <div class="card-head"><i class="fa-solid fa-chart-line"></i> Otras Divisas</div>
-      <div class="chart-container">
-        <canvas id="secondLineChart"></canvas>
-      </div>
     </div>
   </div>
 
@@ -1293,7 +1277,7 @@ input:checked + .slider:before {
     </div>
   </div>
 
-  <!-- Information card - Diseño moderno tipo nube -->
+  <!-- Information card - Diseño moderno tipo nube (más compacto) -->
   <div class="info-cloud">
     <div class="info-cloud-header">
       <div class="info-cloud-icon">
@@ -1309,6 +1293,35 @@ input:checked + .slider:before {
       
       <div class="info-cloud-note">
         <strong>NOTA:</strong> Las tasas de cambio pueden variar según la región y las condiciones del mercado.
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de compartir MEJORADA Y MINIMALISTA -->
+  <div class="share-section">
+    <div class="share-content">
+      <div class="share-title">Compartir esta página en:</div>
+      <div class="share-buttons">
+        <button class="share-btn whatsapp" onclick="shareOnWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+          <span class="tooltip">WhatsApp</span>
+        </button>
+        <button class="share-btn facebook" onclick="shareOnFacebook()">
+          <i class="fab fa-facebook-f"></i>
+          <span class="tooltip">Facebook</span>
+        </button>
+        <button class="share-btn messenger" onclick="shareOnMessenger()">
+          <i class="fab fa-facebook-messenger"></i>
+          <span class="tooltip">Messenger</span>
+        </button>
+        <button class="share-btn telegram" onclick="shareOnTelegram()">
+          <i class="fab fa-telegram"></i>
+          <span class="tooltip">Telegram</span>
+        </button>
+        <button class="share-btn link" onclick="copyLink()">
+          <i class="fas fa-link"></i>
+          <span class="tooltip">Copiar enlace</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1349,15 +1362,13 @@ input:checked + .slider:before {
 
 <script>
 const defaultRows = [
-  { code:"EUR", label:"EUR", flag:"https://flagcdn.com/eu.svg", rate:465.00, delta:+5, trend:"up" },
-  { code:"USD", label:"USD", flag:"https://flagcdn.com/us.svg", rate:413.00, delta:+3, trend:"up" },
-  { code:"MLC", label:"MLC", flag:"https://eltoque.com/images/mlc.png", rate:195.00, delta:+5, trend:"up" },
-  { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:278.00, delta:0, trend:"neutral" },
-  { code:"CHF", label:"CHF", flag:"https://flagcdn.com/ch.svg", rate:418.27, delta:+1.06, trend:"up" },
-  { code:"MXN", label:"MXN", flag:"https://flagcdn.com/mx.svg", rate:21.93, delta:+0.26, trend:"up" },
+  { code:"EUR", label:"EUR", flag:"https://flagcdn.com/eu.svg", rate:465.00, delta:0, trend:"neutral" },
+  { code:"USD", label:"USD", flag:"https://flagcdn.com/us.svg", rate:413.00, delta:0, trend:"neutral" },
+  { code:"MLC", label:"MLC", flag:"https://eltoque.com/images/mlc.png", rate:195.00, delta:0, trend:"neutral" },
+  { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:279.69, delta:+1.78, trend:"up" },
+  { code:"MXN", label:"MXN", flag:"https://flagcdn.com/mx.svg", rate:21.79, delta:-0.03, trend:"down" },
   { code:"BRL", label:"BRL", flag:"https://flagcdn.com/br.svg", rate:74.24, delta:+0.1, trend:"up" },
-  { code:"ZELLE", label:"ZELLE", flag:"https://divisascu.netlify.app/img_2901.png", rate:410.38, delta:-0.32, trend:"down" },
-  { code:"CLA", label:"CLA", flag:"https://divisascu.netlify.app/img_2902.png", rate:404.88, delta:+0.38, trend:"up" }
+  { code:"ZELLE", label:"ZELLE", flag:"https://divisascu.netlify.app/img_2901.png", rate:411.50, delta:+1.13, trend:"up" },
 ];
 
 let rows = JSON.parse(JSON.stringify(defaultRows));
@@ -1391,7 +1402,7 @@ function formatTime12Hour(date) {
   return `${hours}:${minutes} ${ampm}`;
 }
 
-// Funciones para compartir - CORREGIDAS
+// Funciones para compartir - MEJORADAS
 function shareOnWhatsApp() {
   const text = "💰 Consulta las tasas de cambio actualizadas del mercado informal de divisas en Cuba. DivisasCU - Mercado Informal";
   const url = window.location.href;
@@ -1402,6 +1413,28 @@ function shareOnWhatsApp() {
 function shareOnFacebook() {
   const url = encodeURIComponent(window.location.href);
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+}
+
+function shareOnMessenger() {
+  const url = encodeURIComponent(window.location.href);
+  window.open(`fb-messenger://share/?link=${url}`, '_blank');
+}
+
+function shareOnTelegram() {
+  const text = "💰 Consulta las tasas de cambio actualizadas del mercado informal de divisas en Cuba. DivisasCU - Mercado Informal";
+  const url = window.location.href;
+  const encodedText = encodeURIComponent(text + " " + url);
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function copyLink() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    // Mostrar notificación de enlace copiado
+    alert("Enlace copiado al portapapeles");
+  }).catch(err => {
+    console.error('Error al copiar el enlace: ', err);
+  });
 }
 
 function tickClock(){
@@ -1566,7 +1599,6 @@ $("#darkModeToggle").addEventListener("change", (e) => {
 
 /* Charts */
 let lineChart;
-let secondLineChart;
 
 function updateChart(){
   const ctx = $("#lineChart").getContext("2d");
@@ -1592,58 +1624,6 @@ function updateChart(){
   lineChart = new Chart(ctx, {
     type: 'line', 
     data: {labels, datasets}, 
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            padding: 20
-          }
-        }
-      }
-    }
-  });
-  
-  // Segundo gráfico con monedas CLA, CAD y ZELLE
-  const secondCtx = $("#secondLineChart").getContext("2d");
-  const claData = rows.find(r => r.code === "CLA");
-  const cadData = rows.find(r => r.code === "CAD");
-  const zelleData = rows.find(r => r.code === "ZELLE");
-  
-  const secondDatasets = [
-    {
-      label: claData.code, 
-      data: labels.map((_,j) => Number((claData.rate * (1 + (Math.cos((j+1)*0.8)/80))).toFixed(2))),
-      tension: 0.3, 
-      borderWidth: 2,
-      borderColor: '#8B5CF6',
-      backgroundColor: '#8B5CF620'
-    },
-    {
-      label: cadData.code, 
-      data: labels.map((_,j) => Number((cadData.rate * (1 + (Math.sin((j+1)*0.9)/90))).toFixed(2))),
-      tension: 0.3, 
-      borderWidth: 2,
-      borderColor: '#F59E0B',
-      backgroundColor: '#F59E0B20'
-    },
-    {
-      label: zelleData.code, 
-      data: labels.map((_,j) => Number((zelleData.rate * (1 + (Math.cos((j+1)*1.1)/70))).toFixed(2))),
-      tension: 0.3, 
-      borderWidth: 2,
-      borderColor: '#EC4899',
-      backgroundColor: '#EC489920'
-    }
-  ];
-  
-  if(secondLineChart) secondLineChart.destroy();
-  secondLineChart = new Chart(secondCtx, {
-    type: 'line', 
-    data: {labels, datasets: secondDatasets}, 
     options: {
       responsive: true,
       maintainAspectRatio: false,
