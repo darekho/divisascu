@@ -3,7 +3,7 @@
 // Lista de anuncios disponibles
 const anuncios = [
   {
-    activado: "si",
+    activado: "no",
     titulo: "CiberCuba Noticias",
     descripcion: "La fuente definitiva para estar bien informado sobre la actualidad de Cuba, con una cobertura integral de lo que acontece tanto dentro de la isla como en la comunidad cubana en el exterior.",
     imagen: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/35/fe/cf/35fecf49-188e-1384-2eda-89c9f392dde1/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/1200x630wa.png",
@@ -11,7 +11,7 @@ const anuncios = [
     enlaceBoton: "https://www.cibercuba.com/"
   },
   {
-    activado: "no",
+    activado: "si",
     titulo: "El Toque - Periodismo Independiente",
     descripcion: "Medio de comunicación independiente cubano que ofrece análisis, reportajes y noticias sobre la realidad socioeconómica de Cuba.",
     imagen: "https://eltoque.com/assets/logo-et.png",
