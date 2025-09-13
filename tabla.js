@@ -1,6 +1,6 @@
 // tabla.js - Datos de tasas de cambio para DivisasCU
 window.tableData = [
-  { code:"EUR", label:"EUR", flag:"https://flagcdn.com/eu.svg", rate:465.00, delta:0, trend:"neutral" },
+  { code:"EUR", label:"EUROS", flag:"https://flagcdn.com/eu.svg", rate:465.00, delta:0, trend:"neutral" },
   { code:"USD", label:"USD", flag:"https://flagcdn.com/us.svg", rate:413.00, delta:0, trend:"neutral" },
   { code:"MLC", label:"MLC", flag:"https://eltoque.com/images/mlc.png", rate:195.00, delta:0, trend:"neutral" },
   { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:279.69, delta:+1.78, trend:"up" },
