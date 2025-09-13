@@ -1428,7 +1428,7 @@ input:checked + .slider:before {
         <div class="card-head-cloud-icon">
           <i class="fas fa-cog"></i>
         </div>
-        <h2 class="card-head-cloud-title">CONFIGURACIÓN</h2>
+        <h2 class="card-head-cloud-title">CONFIGURATION</h2>
       </div>
     </div>
     <div>
@@ -1542,6 +1542,8 @@ input:checked + .slider:before {
 <script src="tabla.js"></script>
 <!-- Archivo externo con datos de anuncios -->
 <script src="anuncio.js"></script>
+<!-- Archivo externo con datos para gráficos -->
+<script src="grafico.js"></script>
 
 <script>
 // Variables globales para los datos de la tabla
@@ -1776,17 +1778,43 @@ let lineChart;
 
 function updateChart(){
   const ctx = $("#lineChart").getContext("2d");
-  const labels = Array.from({length:7}, (_,i) => {
-  const d = new Date();
-  d.setDate(d.getDate() - (6-i));
-  return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
-  });
   
-  const datasets = rows.slice(0,3).map((r,i) => {
-    const data = labels.map((_,j) => Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2)));
+  // Obtener datos para las 3 primeras monedas
+  const datasets = rows.slice(0, 3).map((r, i) => {
+    // Buscar datos históricos para esta moneda
+    let datosHistoricos = [];
+    
+    if (typeof graficoData !== 'undefined') {
+      const monedaData = graficoData.find(m => m.code === r.code);
+      if (monedaData) {
+        // Obtener últimos 7 días
+        const ultimosDatos = obtenerUltimosDias(r.code, 7);
+        datosHistoricos = ultimosDatos.valores;
+        
+        // Formatear fechas para mostrar en el gráfico
+        const labels = ultimosDatos.fechas.map(f => {
+          const fecha = new Date(f);
+          return fecha.toLocaleDateString('es-ES', {day: '2-digit', month: '2-digit'});
+        });
+        
+        // Actualizar las etiquetas del gráfico si es la primera moneda
+        if (i === 0) {
+          Chart.defaults.font.family = 'Inter, system-ui, Arial';
+          lineChart.data.labels = labels;
+        }
+      }
+    }
+    
+    // Si no hay datos históricos, usar datos simulados como respaldo
+    if (datosHistoricos.length === 0) {
+      datosHistoricos = Array.from({length: 7}, (_, j) => 
+        Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2))
+      );
+    }
+    
     return {
-      label: r.code, 
-      data, 
+      label: r.label, 
+      data: datosHistoricos, 
       tension: 0.3, 
       borderWidth: 2,
       borderColor: ['#3B82F6', '#EF4444', '#10B981'][i],
@@ -1795,6 +1823,15 @@ function updateChart(){
   });
   
   if(lineChart) lineChart.destroy();
+  
+  // Si no hay etiquetas, usar las predeterminadas
+  const labels = lineChart && lineChart.data.labels ? lineChart.data.labels : 
+                Array.from({length: 7}, (_, i) => {
+                  const d = new Date();
+                  d.setDate(d.getDate() - (6-i));
+                  return d.toLocaleDateString('es-ES', {day: '2-digit', month: '2-digit'});
+                });
+  
   lineChart = new Chart(ctx, {
     type: 'line', 
     data: {labels, datasets}, 
@@ -1809,9 +1846,40 @@ function updateChart(){
             padding: 20
           }
         }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)'
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          }
+        }
       }
     }
   });
+}
+
+// Función para actualizar los valores diarios (debe llamarse manualmente)
+function actualizarValorDiario(codigoMoneda, valor) {
+  if (typeof graficoData === 'undefined' || typeof agregarValorDiario === 'undefined') {
+    console.error("El archivo grafico.js no está cargado correctamente");
+    return;
+  }
+  
+  const fechaHoy = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  agregarValorDiario(codigoMoneda, fechaHoy, valor);
+  
+  // Si el gráfico está visible, actualizarlo
+  if ($("#tabChart").style.display !== "none") {
+    updateChart();
+  }
+  
+  console.log(`Valor actualizado para ${codigoMoneda}: ${valor} en fecha ${fechaHoy}`);
 }
 
 /* Tabs */
