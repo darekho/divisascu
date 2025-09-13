@@ -1540,6 +1540,8 @@ input:checked + .slider:before {
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <!-- Archivo externo con datos de la tabla -->
 <script src="tabla.js"></script>
+<!-- Archivo externo con datos de anuncios -->
+<script src="anuncio.js"></script>
 
 <script>
 // Variables globales para los datos de la tabla
@@ -1917,6 +1919,25 @@ closeAd.addEventListener('click', () => {
 
 // Iniciar el sistema de anuncios
 function startAdSystem() {
+  // Verificar si hay anuncios activos
+  const anuncio = obtenerAnuncioAleatorio();
+  
+  if (!anuncio) {
+    console.log("No hay anuncios activos en este momento");
+    return;
+  }
+  
+  // Configurar el anuncio
+  adTitle.textContent = anuncio.titulo;
+  adDescription.textContent = anuncio.descripcion;
+  adCta.textContent = anuncio.textoBoton;
+  adCta.href = anuncio.enlaceBoton;
+  
+  // Actualizar la imagen del anuncio
+  const adImage = document.querySelector('.ad-image img');
+  adImage.src = anuncio.imagen;
+  adImage.alt = anuncio.titulo;
+  
   // Mostrar el primer anuncio después de 1 minuto (60000 ms)
   setTimeout(() => {
     showAd();
