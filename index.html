@@ -1521,15 +1521,15 @@ input:checked + .slider:before {
     <div class="countdown-timer" id="countdownTimer">10</div>
   </div>
   <div class="ad-content">
-    <h2 class="ad-title" id="adTitle">CiberCuba Noticias</h2>
+    <h2 class="ad-title" id="adTitle"></h2>
     
     <div class="ad-image">
-      <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/35/fe/cf/35fecf49-188e-1384-2eda-89c9f392dde1/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/1200x630wa.png" alt="Servicio de cambio de divisas">
+      <img id="adImage" src="" alt="">
     </div>
     
-    <p class="ad-description" id="adDescription">La fuente definitiva para estar bien informado sobre la actualidad de Cuba, con una cobertura integral de lo que acontece tanto dentro de la isla como en la comunidad cubana en el exterior.</p>
+    <p class="ad-description" id="adDescription"></p>
     
-    <a href="https://www.cibercuba.com/" class="ad-cta" id="adCta" target="_blank">VISITAR</a>
+    <a href="#" class="ad-cta" id="adCta" target="_blank"></a>
   </div>
   <div class="ad-footer">
     Anuncio • <span id="currentDate"></span>
@@ -1917,6 +1917,27 @@ closeAd.addEventListener('click', () => {
   toggleBodyScroll(false); // Desbloquear scroll
 });
 
+// Función para obtener un anuncio activo aleatorio
+function obtenerAnuncioAleatorio() {
+  // Verificar si la variable anuncios existe (definida en anuncio.js)
+  if (typeof anuncios === 'undefined' || !Array.isArray(anuncios)) {
+    console.error("Error: No se pudieron cargar los datos de anuncios");
+    return null;
+  }
+  
+  // Filtrar solo anuncios activados
+  const anunciosActivos = anuncios.filter(anuncio => anuncio.activado === "si");
+  
+  // Si no hay anuncios activos, retornar null
+  if (anunciosActivos.length === 0) {
+    return null;
+  }
+  
+  // Seleccionar un anuncio aleatorio de los activos
+  const indiceAleatorio = Math.floor(Math.random() * anunciosActivos.length);
+  return anunciosActivos[indiceAleatorio];
+}
+
 // Iniciar el sistema de anuncios
 function startAdSystem() {
   // Verificar si hay anuncios activos
@@ -1956,16 +1977,16 @@ document.addEventListener('DOMContentLoaded', () => {
     $("#darkModeToggle").checked = true;
   }
   
-  // Inicializar con los datos del archivo externo
-  // Los datos se cargan desde tabla.js y están disponibles como window.tableData
-  if (window.tableData && Array.isArray(window.tableData)) {
-    rows = JSON.parse(JSON.stringify(window.tableData));
-    filteredRows = [...rows];
-    renderTable();
-    refreshCalcOptions();
-  } else {
-    console.error("Error: No se pudieron cargar los datos de la tabla");
-  }
+// Inicializar con los datos del archivo externo
+// Verificar si los datos de la tabla están disponibles
+if (typeof tableData !== 'undefined' && Array.isArray(tableData)) {
+  rows = JSON.parse(JSON.stringify(tableData));
+  filteredRows = [...rows];
+  renderTable();
+  refreshCalcOptions();
+} else {
+  console.error("Error: No se pudieron cargar los datos de la tabla");
+}
   
   // Iniciar el sistema de anuncios
   startAdSystem();
