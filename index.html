@@ -156,6 +156,9 @@ header {
 .clock-box {
   text-align: center;
   margin-right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .clock-box .title {
@@ -183,9 +186,65 @@ header {
   animation: blink 1s infinite;
 }
 
+/* Icono de notificaciones */
+.notification-icon {
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.notification-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff6b35;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(255, 107, 53, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+  }
 }
 
 /* Botón flotante de usuarios en línea */
@@ -479,21 +538,61 @@ tbody td {
   border-radius: 999px;
   font-weight: 700;
   font-size: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.trend::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.trend:hover::before {
+  opacity: 1;
 }
 
 .trend.up {
   color: #fff;
   background: var(--up);
+  animation: pulse-up 2s infinite;
 }
 
 .trend.down {
   color: #fff;
   background: var(--down);
+  animation: pulse-down 2s infinite;
 }
 
 .trend.neutral {
   color: #fff;
   background: var(--neutral);
+  animation: pulse-neutral 2s infinite;
+}
+
+@keyframes pulse-up {
+  0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+}
+
+@keyframes pulse-down {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+@keyframes pulse-neutral {
+  0% { box-shadow: 0 0 0 0 rgba(107, 114, 128, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(107, 114, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(107, 114, 128, 0); }
 }
 
 /* Estilo para la columna de cambio (negrita) */
@@ -1142,7 +1241,108 @@ input:checked + .slider:before {
   background: rgba(159, 122, 234, 0.15);
 }
 
-/* ===== FIN NUEVOS ESTILOS ===== */
+/* ===== ESTILOS PARA EL SISTEMA DE NOTIFICACIONES ===== */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1002;
+  overflow: hidden;
+  display: none;
+  animation: slideDown 0.5s ease-out;
+  border-left: 5px solid #ff6b35;
+}
+
+.notification-header {
+  background: #f8f9fa;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.notification-header h3 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.close-notification {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.close-notification:hover {
+  color: #333;
+}
+
+.notification-content {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item:hover {
+  background: #f8f9fa;
+}
+
+.notification-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notification-title i {
+  color: #ff6b35;
+}
+
+.notification-description {
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.notification-date {
+  font-size: 0.8rem;
+  color: #888;
+  text-align: right;
+}
+
+.notification-footer {
+  padding: 10px 20px;
+  background: #f8f9fa;
+  text-align: right;
+  font-size: 0.9rem;
+  color: 888;
+  border-top: 1px solid #eee;
+}
+
+/* ===== FIN ESTILOS PARA NOTIFICACIONES ===== */
 
 @media(max-width:480px){
   .rate {
@@ -1242,6 +1442,18 @@ input:checked + .slider:before {
     font-size: 1rem;
   }
   
+  .notification-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .notification-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+  }
+  
   .chart-container {
     height: 200px;
   }
@@ -1302,6 +1514,15 @@ input:checked + .slider:before {
   .card-head-cloud-title {
     font-size: 0.9rem;
   }
+  
+  /* Ajustes para notificaciones en móviles */
+  .notification-container {
+    width: 95%;
+  }
+  
+  .notification-title {
+    font-size: 1rem;
+  }
 }
 </style>
 </head>
@@ -1319,6 +1540,10 @@ input:checked + .slider:before {
     <div class="clock-box">
       <div class="title">Time</div>
       <div id="clock" class="clock">00<span class="blink">:</span>00<span class="ampm"> AM</span></div>
+      <div class="notification-icon" id="notificationIcon">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+      </div>
     </div>
   </div>
 </header>
@@ -1428,7 +1653,7 @@ input:checked + .slider:before {
         <div class="card-head-cloud-icon">
           <i class="fas fa-cog"></i>
         </div>
-        <h2 class="card-head-cloud-title">CONFIGURATION</h2>
+        <h2 class="card-head-cloud-title">CONFIGURACIÓN</h2>
       </div>
     </div>
     <div>
@@ -1536,14 +1761,28 @@ input:checked + .slider:before {
   </div>
 </div>
 
+<!-- Contenedor de notificaciones -->
+<div class="notification-container" id="notificationContainer">
+  <div class="notification-header">
+    <h3>Notificaciones</h3>
+    <button class="close-notification" id="closeNotification">&times;</button>
+  </div>
+  <div class="notification-content" id="notificationContent">
+    <!-- Las notificaciones se cargarán aquí dinámicamente -->
+  </div>
+  <div class="notification-footer">
+    <span id="notificationCount">0 notificaciones</span>
+  </div>
+</div>
+
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <!-- Archivo externo con datos de la tabla -->
 <script src="tabla.js"></script>
 <!-- Archivo externo con datos de anuncios -->
 <script src="anuncio.js"></script>
-<!-- Archivo externo con datos para gráficos -->
-<script src="grafico.js"></script>
+<!-- Archivo externo con datos de notificaciones -->
+<script src="notificaciones.js"></script>
 
 <script>
 // Variables globales para los datos de la tabla
@@ -1555,6 +1794,10 @@ let conversionType = "toCurrency"; // "toCurrency" or "toCUP"
 let adInterval;
 let countdownInterval;
 let countdownValue = 10;
+
+// Variables para el sistema de notificaciones
+let notifications = [];
+let unreadNotifications = 0;
 
 /* Utils */
 const $ = s => document.querySelector(s);
@@ -1778,43 +2021,17 @@ let lineChart;
 
 function updateChart(){
   const ctx = $("#lineChart").getContext("2d");
+  const labels = Array.from({length:7}, (_,i) => {
+  const d = new Date();
+  d.setDate(d.getDate() - (6-i));
+  return d.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'});
+  });
   
-  // Obtener datos para las 3 primeras monedas
-  const datasets = rows.slice(0, 3).map((r, i) => {
-    // Buscar datos históricos para esta moneda
-    let datosHistoricos = [];
-    
-    if (typeof graficoData !== 'undefined') {
-      const monedaData = graficoData.find(m => m.code === r.code);
-      if (monedaData) {
-        // Obtener últimos 7 días
-        const ultimosDatos = obtenerUltimosDias(r.code, 7);
-        datosHistoricos = ultimosDatos.valores;
-        
-        // Formatear fechas para mostrar en el gráfico
-        const labels = ultimosDatos.fechas.map(f => {
-          const fecha = new Date(f);
-          return fecha.toLocaleDateString('es-ES', {day: '2-digit', month: '2-digit'});
-        });
-        
-        // Actualizar las etiquetas del gráfico si es la primera moneda
-        if (i === 0) {
-          Chart.defaults.font.family = 'Inter, system-ui, Arial';
-          lineChart.data.labels = labels;
-        }
-      }
-    }
-    
-    // Si no hay datos históricos, usar datos simulados como respaldo
-    if (datosHistoricos.length === 0) {
-      datosHistoricos = Array.from({length: 7}, (_, j) => 
-        Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2))
-      );
-    }
-    
+  const datasets = rows.slice(0,3).map((r,i) => {
+    const data = labels.map((_,j) => Number((r.rate * (1 + (Math.sin((j+1)*1.2+i)/100))).toFixed(2)));
     return {
-      label: r.label, 
-      data: datosHistoricos, 
+      label: r.code, 
+      data, 
       tension: 0.3, 
       borderWidth: 2,
       borderColor: ['#3B82F6', '#EF4444', '#10B981'][i],
@@ -1823,15 +2040,6 @@ function updateChart(){
   });
   
   if(lineChart) lineChart.destroy();
-  
-  // Si no hay etiquetas, usar las predeterminadas
-  const labels = lineChart && lineChart.data.labels ? lineChart.data.labels : 
-                Array.from({length: 7}, (_, i) => {
-                  const d = new Date();
-                  d.setDate(d.getDate() - (6-i));
-                  return d.toLocaleDateString('es-ES', {day: '2-digit', month: '2-digit'});
-                });
-  
   lineChart = new Chart(ctx, {
     type: 'line', 
     data: {labels, datasets}, 
@@ -1846,40 +2054,9 @@ function updateChart(){
             padding: 20
           }
         }
-      },
-      scales: {
-        y: {
-          beginAtZero: false,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.1)'
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
       }
     }
   });
-}
-
-// Función para actualizar los valores diarios (debe llamarse manualmente)
-function actualizarValorDiario(codigoMoneda, valor) {
-  if (typeof graficoData === 'undefined' || typeof agregarValorDiario === 'undefined') {
-    console.error("El archivo grafico.js no está cargado correctamente");
-    return;
-  }
-  
-  const fechaHoy = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
-  agregarValorDiario(codigoMoneda, fechaHoy, valor);
-  
-  // Si el gráfico está visible, actualizarlo
-  if ($("#tabChart").style.display !== "none") {
-    updateChart();
-  }
-  
-  console.log(`Valor actualizado para ${codigoMoneda}: ${valor} en fecha ${fechaHoy}`);
 }
 
 /* Tabs */
@@ -2036,6 +2213,114 @@ function startAdSystem() {
   }, 60000);
 }
 
+/* SISTEMA DE NOTIFICACIONES */
+// Elementos DOM para notificaciones
+const notificationIcon = document.getElementById('notificationIcon');
+const notificationBadge = document.getElementById('notificationBadge');
+const notificationContainer = document.getElementById('notificationContainer');
+const notificationContent = document.getElementById('notificationContent');
+const notificationCount = document.getElementById('notificationCount');
+const closeNotification = document.getElementById('closeNotification');
+
+// Cargar notificaciones desde el archivo externo
+function cargarNotificaciones() {
+  // Verificar si la variable notificacionesData existe (definida en notificaciones.js)
+  if (typeof notificacionesData === 'undefined' || !Array.isArray(notificacionesData)) {
+    console.error("Error: No se pudieron cargar los datos de notificaciones");
+    notifications = [];
+    return;
+  }
+  
+  notifications = [...notificacionesData];
+  unreadNotifications = notifications.length;
+  actualizarBadgeNotificaciones();
+  renderNotificaciones();
+}
+
+// Actualizar el badge de notificaciones
+function actualizarBadgeNotificaciones() {
+  if (unreadNotifications > 0) {
+    notificationBadge.textContent = unreadNotifications;
+    notificationBadge.style.display = 'flex';
+    
+    // Agregar animación al icono de notificaciones
+    notificationIcon.classList.add('pulse');
+    setTimeout(() => {
+      notificationIcon.classList.remove('pulse');
+    }, 1000);
+  } else {
+    notificationBadge.style.display = 'none';
+  }
+  
+  notificationCount.textContent = `${notifications.length} notificaciones`;
+}
+
+// Renderizar las notificaciones en el contenedor
+function renderNotificaciones() {
+  notificationContent.innerHTML = '';
+  
+  if (notifications.length === 0) {
+    notificationContent.innerHTML = `
+      <div class="notification-item">
+        <div class="notification-title">
+          <i class="fas fa-info-circle"></i>
+          No hay notificaciones
+        </div>
+        <div class="notification-description">
+          No tienes notificaciones en este momento.
+        </div>
+      </div>
+    `;
+    return;
+  }
+  
+  notifications.forEach((notif, index) => {
+    const notifElement = document.createElement('div');
+    notifElement.className = 'notification-item';
+    notifElement.innerHTML = `
+      <div class="notification-title">
+        <i class="fas fa-bell"></i>
+        ${notif.titulo}
+      </div>
+      <div class="notification-description">
+        ${notif.descripcion}
+      </div>
+      <div class="notification-date">
+        ${notif.fecha}
+      </div>
+    `;
+    
+    notificationContent.appendChild(notifElement);
+  });
+}
+
+// Mostrar el contenedor de notificaciones
+function mostrarNotificaciones() {
+  notificationContainer.style.display = 'block';
+  toggleBodyScroll(true);
+  
+  // Marcar todas las notificaciones como leídas
+  unreadNotifications = 0;
+  actualizarBadgeNotificaciones();
+}
+
+// Cerrar el contenedor de notificaciones
+function cerrarNotificaciones() {
+  notificationContainer.style.display = 'none';
+  toggleBodyScroll(false);
+}
+
+// Event listeners para el sistema de notificaciones
+notificationIcon.addEventListener('click', mostrarNotificaciones);
+closeNotification.addEventListener('click', cerrarNotificaciones);
+
+// Cerrar notificaciones al hacer clic fuera del contenedor
+notificationContainer.addEventListener('click', (e) => {
+  if (e.target === notificationContainer) {
+    cerrarNotificaciones();
+  }
+});
+
 // Cargar tema desde localStorage al iniciar
 document.addEventListener('DOMContentLoaded', () => {
   // Cargar tema
@@ -2045,19 +2330,22 @@ document.addEventListener('DOMContentLoaded', () => {
     $("#darkModeToggle").checked = true;
   }
   
-// Inicializar con los datos del archivo externo
-// Verificar si los datos de la tabla están disponibles
-if (typeof tableData !== 'undefined' && Array.isArray(tableData)) {
-  rows = JSON.parse(JSON.stringify(tableData));
-  filteredRows = [...rows];
-  renderTable();
-  refreshCalcOptions();
-} else {
-  console.error("Error: No se pudieron cargar los datos de la tabla");
-}
+  // Inicializar con los datos del archivo externo
+  // Verificar si los datos de la tabla están disponibles
+  if (typeof tableData !== 'undefined' && Array.isArray(tableData)) {
+    rows = JSON.parse(JSON.stringify(tableData));
+    filteredRows = [...rows];
+    renderTable();
+    refreshCalcOptions();
+  } else {
+    console.error("Error: No se pudieron cargar los datos de la tabla");
+  }
   
   // Iniciar el sistema de anuncios
   startAdSystem();
+  
+  // Iniciar el sistema de notificaciones
+  cargarNotificaciones();
   
   // Inicializar gráficos solo si es necesario
   if (window.innerWidth > 480) {
