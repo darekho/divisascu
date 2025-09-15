@@ -2,7 +2,7 @@
 const notificacionesData = [
   {
     titulo: "Nueva funcionalidad: Anuncios",
-    descripcion: "Se a implementado un espacio publicitario para que los clientes promocionen sus marcas o negocios ante nuestra audiencia.",
+    descripcion: "Ahora ofrececemos publicidad dirigida a nuestra audiencia. Perfecto para marcas que buscan mayor visibilidad. Contáctenos para más información.",
     fecha: "10/09/2025"
   },
   {
