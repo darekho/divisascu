@@ -6,5 +6,5 @@ window.tableData = [
   { code:"CAD", label:"CAD", flag:"https://flagcdn.com/ca.svg", rate:285.22, delta:+1.6, trend:"up" },
   { code:"MXN", label:"MXN", flag:"https://flagcdn.com/mx.svg", rate:22.01, delta:+0.08, trend:"up" },
   { code:"BRL", label:"BRL", flag:"https://flagcdn.com/br.svg", rate:76.07, delta:-0.16, trend:"down" },
-  { code:"ZELLE", label:"ZELLE", flag:"https://divisascu.vercel.app/img_2901.png", rate:415.62, delta:+0.64, trend:"up" }
+  { code:"ZELLE", label:"ZELLE", flag:"https://divisascu.vercel.app/img_2901.png", rate:416.64, delta:+1.02, trend:"up" }
 ];
